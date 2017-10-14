@@ -55,4 +55,11 @@
 		</div>
 	</div>
 </br>
+
+<div ng-repeat="exam in vm.exams">
+  <exam-directive exam="exam"></exam-directive>
+</div>
+
+<exam-directive exam="vm.exam1"></exam-directive>
+<exam-directive exam="vm.exam2"></exam-directive>
 </md-whiteframe>

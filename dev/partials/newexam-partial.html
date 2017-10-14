@@ -1,0 +1,17 @@
+<div ng-controller="newexamController">
+	<md-whiteframe class="md-whiteframe-21dp" layout="column" >
+	</br>
+	<h1>Ready to start sharing knowledge?</h1>
+
+
+	<md-input-container>
+  	<label>Description</label>
+  	<textarea ng-model="user.description"></textarea>
+	</md-input-container>
+	
+
+	<input id="fileInput" name="file" type="file" class="ng-hide" file-model="blob">
+	<md-button id="uploadButton" class="md-raised md-primary" ng-click="uploadFile()">Upload</md-button>
+
+	</md-whiteframe>
+</div>

@@ -18,6 +18,10 @@
     //vm.selectedItem = "";
     vm.newState = newState;
 
+
+    vm.exams = [{'description': 'calc 1 test'}, {'description': 'calc 1 test'}, {'description': 'calc 1 test'}]
+    vm.exam1 = {'description': 'calc 1 test'}
+    vm.exam2 = {'description': 'calc 2 test'}
     function newState(state) {
       alert("Sorry! You'll need to create a Constitution for " + state + " first!");
     }
