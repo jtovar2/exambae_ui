@@ -1,27 +1,63 @@
 (function(app) {
-	app.controller('HomeController', ['$scope', function($scope, $log, $q) {
+	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
 		 var vm = this;
+
+
+
+	vm.schoolHasBeenSelected = false;
+	vm.schools = SearchFactory.getSchools();
+	vm.searchSchool = "";
+	vm.selectedSchool = "";
+	vm.selectedSchoolChange = selectedSchoolChange;
+	vm.searchSchoolChange = searchSchoolChange;
+
+	vm.schoolQuerySearch = schoolQuerySearch;
+
+
+    function searchSchoolChange(text) {
+
+    	vm.schoolHasBeenSelected = false;
+    }
+
+    function selectedSchoolChange(item) {
+
+    	vm.schoolHasBeenSelected = true;
+    }
+
+    function schoolQuerySearch (query) {
+      var results = query ? vm.schools.filter( createFilterFor(query) ) : vm.schools;
+
+        return results;
+
+    }
+
+
+	
+	vm.selectedClass = "";
+
+
+	
 
     vm.simulateQuery = false;
     vm.isDisabled    = false;
 
-    // list of `state` value/display objects
-    vm.states        = loadAll();
-    vm.querySearch   = querySearch;
-    vm.selectedItemChange = selectedItemChange;
-    vm.searchTextChange   = searchTextChange;
-    vm.searchText = "";
-    vm.wtf = "wtfff";
 
-    vm.querySearch = querySearch;
-    vm.selectedItemChange = selectedItemChange;
+
+    //vm.querySearch   = querySearch;
+    
+    //vm.searchTextChange   = searchTextChange;
+    //vm.searchText = "";
+    //vm.wtf = "wtfff";
+
+    //vm.querySearch = querySearch;
+    //vm.selectedClassChange = selectedClassChange;
     //vm.selectedItem = "";
     vm.newState = newState;
 
 
-    vm.exams = [{'description': 'calc 1 test'}, {'description': 'calc 1 test'}, {'description': 'calc 1 test'}]
-    vm.exam1 = {'description': 'calc 1 test'}
-    vm.exam2 = {'description': 'calc 2 test'}
+    //vm.exams = [];
+
+
     function newState(state) {
       alert("Sorry! You'll need to create a Constitution for " + state + " first!");
     }
@@ -35,7 +71,8 @@
      * remote dataservice call.
      */
     function querySearch (query) {
-      var results = query ? vm.states.filter( createFilterFor(query) ) : vm.states,
+    	console.log(vm.schools);
+      var results = query ? vm.schools.filter( createFilterFor(query) ) : vm.schools,
           deferred;
       if (vm.simulateQuery) {
         deferred = $q.defer();
@@ -51,29 +88,6 @@
 //      console.log(text);
     }
 
-    function selectedItemChange(item) {
-  //    console.log(item);
-    }
-
-    /**
-     * Build `states` list of key/value pairs
-     */
-    function loadAll() {
-      var allStates = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-              Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-              Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-              Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-              North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-              South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-              Wisconsin, Wyoming';
-
-      return allStates.split(/, +/g).map( function (state) {
-        return {
-          value: state.toLowerCase(),
-          display: state
-        };
-      });
-    }
 
     /**
      * Create filter function for a query string

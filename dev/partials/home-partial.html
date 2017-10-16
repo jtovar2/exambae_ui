@@ -5,14 +5,14 @@
 			<md-autocomplete
 		          ng-disabled="vm.isDisabled"
 		          md-no-cache="vm.noCache"
-		          md-selected-item="vm.selectedItem"
-		          md-search-text-change="vm.searchTextChange(vm.searchText)"
-		          md-search-text="vm.searchText"
-		          md-selected-item-change="vm.selectedItemChange(item)"
-		          md-items="item in vm.querySearch(vm.searchText)"
+		          md-selected-item="vm.selectedSchool"
+		          md-search-text-change="vm.searchSchoolChange(vm.searchSchool)"
+		          md-search-text="vm.searchSchool"
+		          md-selected-item-change="vm.selectedSchoolChange(item)"
+		          md-items="item in vm.schoolQuerySearch(vm.searchSchool)"
 		          md-item-text="item.display"
 		          md-min-length="0"
-		          placeholder="School Name">
+		          placeholder="Enter your school's name">
 
 		        	<md-item-template>
 		          	<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.value}}</span>
@@ -27,16 +27,16 @@
 </div>
 </br>
 
-	<div layout="row" layout-align="space-around center">
+	<!-- <div layout="row" layout-align="space-around center">
 		<div flex="90" >
 
 			<md-autocomplete 
 			          ng-disabled="vm.isDisabled"
 			          md-no-cache="vm.noCache"
-			          md-selected-item="vm.selectedItem"
+			          md-selected-item="vm.selectedClass"
 			          md-search-text-change="vm.searchTextChange(vm.searchText)"
 			          md-search-text="vm.searchText"
-			          md-selected-item-change="vm.selectedItemChange(item)"
+			          md-selected-item-change="vm.selectedClassChange(item)"
 			          md-items="item in vm.querySearch(vm.searchText)"
 			          md-item-text="item.display"
 			          md-min-length="0"
@@ -51,13 +51,11 @@
 			        </md-not-found>
 			</md-autocomplete>
 		</div>
-	</div>
+	</div>-->
 </br>
 
 <div ng-repeat="exam in vm.exams">
   <exam-directive exam="exam"></exam-directive>
 </div>
 
-<exam-directive exam="vm.exam1"></exam-directive>
-<exam-directive exam="vm.exam2"></exam-directive>
 </md-whiteframe>
