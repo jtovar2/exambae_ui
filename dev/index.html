@@ -3,6 +3,7 @@
 
 <head>
     <title>exambae</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- inject:css -->
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="/public/css/app.css">
@@ -10,14 +11,23 @@
 </head>
 
 <body ng-app="exambae" ng-cloak>
-    <h1 class="md-display-1 text-center">exambae2</h1>
-    <div class="text-center"><md-icon md-svg-src="/public/images/angular-logo.svg" aria-label="Angular"></md-icon></div>
-    <md-content class="md-padding" layout="row" layout-align="center">
-        <md-nav-bar md-selected-nav-item="" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-sref="home" name="home">Home</md-nav-item>
-            <md-nav-item md-nav-sref="newexam" name="newexam">About</md-nav-item>
-        </md-nav-bar>
-    </md-content>
+    <div ng-controller="HeaderController as vm">
+    <md-toolbar class="md-tall md-accent">
+    
+      <h1 class="md-toolbar-tools">
+        <span>ExamBae<md-icon ng-bind="'favorite'"></md-icon></span>
+      </h1>
+          <div flex="25" ng-hide="vm.state != 'home'" >
+              <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>
+        </div>
+        <div flex="25" ng-hide="vm.state != 'newexam' " >
+              <md-button aria-label="Learn More" ui-sref="home">Get back to schemin'</md-button>
+        </div>
+    
+
+    </md-toolbar>
+    </div>
+
     <div ui-view></div>
     <!-- inject:js -->
     <script src="/bower_components/angular/angular.min.js"></script>
@@ -27,7 +37,7 @@
     <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="/bower_components/angular-ui-router/angular-ui-router.min.js"></script>
     <script src="/public/js/config/app.js"></script>
-    <script src="/public/js/controllers/about-controller.js"></script>
+    <script src="/public/js/controllers/header-controller.js"></script>
     <script src="/public/js/controllers/home-controller.js"></script>
     <script src="/public/js/controllers/newexam-controller.js"></script>
     <script src="/public/js/directives/exam-directive.js"></script>

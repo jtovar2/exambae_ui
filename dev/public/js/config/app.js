@@ -16,12 +16,6 @@ var exambae = angular.module('exambae', ['ngMaterial', 'ngAnimate', 'ngMessages'
             templateUrl: 'partials/home-partial.html',
             controller: 'HomeController',
             controllerAs: "vm"
-        })
-
-        .state('about', {
-            url: '/about',
-            templateUrl: 'partials/about-partial.html',
-            controller: 'AboutController'
         });
     }]);
 })(exambae);
