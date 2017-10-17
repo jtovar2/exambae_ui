@@ -2,7 +2,9 @@
 	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
 		 var vm = this;
 
-
+	vm.loading = true;
+	vm.isSchoolSearchDisabled = false;
+    vm.isSchoolCacheDisabled = false;
 
 	vm.schoolHasBeenSelected = false;
 	vm.schools = SearchFactory.getSchools();
@@ -17,11 +19,22 @@
     function searchSchoolChange(text) {
 
     	vm.schoolHasBeenSelected = false;
+    	console.log("search method");
+    	console.log(vm);
     }
 
     function selectedSchoolChange(item) {
 
-    	vm.schoolHasBeenSelected = true;
+    	if(vm.selectedSchool == null || vm.selectedSchool === "")
+    	{
+    		vm.schoolHasBeenSelected = false
+    	}
+    	else
+    	{
+    		vm.schoolHasBeenSelected = true;
+    	}
+    	console.log("selection method");
+    	console.log(vm);
     }
 
     function schoolQuerySearch (query) {
@@ -30,32 +43,48 @@
         return results;
 
     }
-
-
-	
+    vm.isClassSearchDisabled = false;
+    vm.isClassCacheDisabled = false;
+    vm.classHasBeenSelected = false;
+    vm.searchClass = "";
+    vm.classQuerySearch = classQuerySearch;
+	vm.schoolClasess = SearchFactory.getClasses();
 	vm.selectedClass = "";
+	vm.selectedClassChange = selectedClassChange;
+	vm.searchClassChange = searchClassChange;
+
+	
+
+
+    function searchClassChange(text) {
+
+    	vm.classHasBeenSelected = false;
+    }
+
+    function selectedClassChange(item) {
+
+    	vm.classHasBeenSelected = true;
+    }
+
+    function classQuerySearch (query) {
+      var results = query ? vm.schoolClasess.filter( createFilterFor(query) ) : vm.schoolClasess;
+
+        return results;
+    }
 
 
 	
 
-    vm.simulateQuery = false;
-    vm.isDisabled    = false;
+
+
+	
 
 
 
-    //vm.querySearch   = querySearch;
-    
-    //vm.searchTextChange   = searchTextChange;
-    //vm.searchText = "";
-    //vm.wtf = "wtfff";
 
-    //vm.querySearch = querySearch;
-    //vm.selectedClassChange = selectedClassChange;
-    //vm.selectedItem = "";
+
+
     vm.newState = newState;
-
-
-    //vm.exams = [];
 
 
     function newState(state) {
@@ -71,8 +100,8 @@
      * remote dataservice call.
      */
     function querySearch (query) {
-    	console.log(vm.schools);
-      var results = query ? vm.schools.filter( createFilterFor(query) ) : vm.schools,
+    	console.log(vm.schoolClasses);
+      var results = query ? vm.schoolClasses.filter( createFilterFor(query) ) : vm.schoolClasses,
           deferred;
       if (vm.simulateQuery) {
         deferred = $q.defer();

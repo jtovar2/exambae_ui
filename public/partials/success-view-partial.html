@@ -1,0 +1,39 @@
+<!-- submission/complete
+
+https://giphy.com/embed/b5LTssxCLpvVe
+
+https://giphy.com/embed/y8Mz1yj13s3kI
+
+https://giphy.com/embed/eXMBrz9AZzfUY
+
+
+https://giphy.com/embed/mb6PqXxtfdmZW
+
+https://giphy.com/embed/la9hWXagjnwcw
+
+https://giphy.com/embed/3ohzgQ0g3ugoQsNhVS
+
+https://giphy.com/embed/1311f7YK2wcOCA -->
+
+<md-whiteframe class="md-whiteframe-21dp" flex="90" layout="column" layout-align="space-around ">
+	<br>
+	<div layout ="column" flex="noshrink" width="600px" height="400px" layout-align="space-around center">
+
+
+		<iframe ng-if="random === 0" flex src="https://giphy.com/embed/b5LTssxCLpvVe" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 1" flex src="https://giphy.com/embed/y8Mz1yj13s3kI" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 2" flex src="https://giphy.com/embed/eXMBrz9AZzfUY" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 3" flex src="https://giphy.com/embed/mb6PqXxtfdmZW" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 4" flex src="https://giphy.com/embed/1311f7YK2wcOCA" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 5" flex src="https://giphy.com/embed/la9hWXagjnwcw" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		<iframe ng-if="random === 6" flex src="https://giphy.com/embed/3ohzgQ0g3ugoQsNhVS" width="800px" height="500px" frameBorder="0" class="giphy-embed"></iframe>
+		
+
+
+	</div>
+
+	<div layout="row" layout-align="space-around center"  >
+		<h1 ng-if="randomText === 0" class=".md-display-1">Thank you!</h1>
+		<h1 ng-if="randomText === 1" class=".md-display-1">Stay Scheming</h1>
+	</div>
+</md-whiteframe>

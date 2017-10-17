@@ -22,7 +22,13 @@
 
         function getClasses(school)
         {
-        	return ['PHYS1001', 'PHYS1001', 'CSC4101', 'CSC3000'];
+        	var classes = ['PHYS1001', 'PHYS1001', 'CSC4101', 'CSC3000'];
+        	return classes.map( function (school) {
+				        return {
+				          value: school.toLowerCase(),
+				          display: school
+				        };
+    			})
         }
 
         function getExams(school, classname)
