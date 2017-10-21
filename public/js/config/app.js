@@ -8,7 +8,8 @@ var exambae = angular.module('exambae', ['ngMaterial', 'ngAnimate', 'ngMessages'
         $stateProvider.state('newexam', {
 		url: '/newexam',
 		templateUrl: 'partials/newexam-partial.html',
-		controller: 'newexamController'
+		controller: 'newexamController',
+        controllerAs: 'vm'
 	})
 
 	.state('home', {

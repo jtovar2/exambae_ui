@@ -14,8 +14,10 @@
     <div ng-controller="HeaderController as vm">
     <md-toolbar class="md-tall md-accent">
     
-      <h1 class="md-toolbar-tools">
-        <span>ExamBae<md-icon ng-bind="'favorite'"></md-icon></span>
+
+      <h1 class="md-toolbar-tools" ui-sref="newexam">
+        <span>ExamBae 
+            <md-icon ng-bind="'favorite'"></md-icon></span>
       </h1>
           <div flex="25" ng-hide="vm.state != 'home'" >
               <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>

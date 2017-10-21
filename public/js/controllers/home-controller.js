@@ -2,7 +2,7 @@
 	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
 		 var vm = this;
 
-	vm.loading = true;
+	vm.loading = false;
 	vm.isSchoolSearchDisabled = false;
     vm.isSchoolCacheDisabled = false;
 
