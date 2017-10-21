@@ -2,6 +2,9 @@
 	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
 		 var vm = this;
 
+     vm.exams = [];
+
+
 	vm.loading = false;
 	vm.isSchoolSearchDisabled = false;
     vm.isSchoolCacheDisabled = false;
@@ -27,7 +30,9 @@
 
     	if(vm.selectedSchool == null || vm.selectedSchool === "")
     	{
-    		vm.schoolHasBeenSelected = false
+    		vm.schoolHasBeenSelected = false;
+        vm.classHasBeenSelected = false;
+        vm.selectedClass = "";
     	}
     	else
     	{
@@ -62,8 +67,20 @@
     }
 
     function selectedClassChange(item) {
+      if(vm.selectedClass === null || vm.selectedClass === "")
+      {
+        vm.classHasBeenSelected = false
+      }
+      else
+      {
+        vm.classHasBeenSelected = true;
+      }
 
-    	vm.classHasBeenSelected = true;
+      if(vm.schoolHasBeenSelected && vm.classHasBeenSelected)
+      {
+        vm.exams = SearchFactory.getExams(vm.selectedSchool, vm.selectedClass);
+      }
+
     }
 
     function classQuerySearch (query) {

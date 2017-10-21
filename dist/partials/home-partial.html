@@ -54,7 +54,7 @@
 	</div>
 </br>
 
-<div ng-repeat="exam in vm.exams">
+<div ng-show="vm.classHasBeenSelected" ng-repeat="exam in vm.exams">
   <exam-directive exam="exam"></exam-directive>
 </div>
 
