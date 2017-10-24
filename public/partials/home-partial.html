@@ -1,4 +1,4 @@
-<md-whiteframe class="md-whiteframe-21dp" layout="column" ng-hide="vm.loading" >
+<md-whiteframe class="md-whiteframe-21dp" layout="column" ng-hide="vm.loadingSchools" >
 </br>
  	<div layout="row" layout-align="space-around center" >
 		<div flex="90" >
@@ -15,7 +15,7 @@
 		          placeholder="Enter your school's name">
 
 		        	<md-item-template>
-		          	<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.value}}</span>
+		          	<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
 		        	</md-item-template>
 				  	<md-not-found>
 		          	No states matching "{{vm.searchSchool}}" were found.
@@ -27,7 +27,7 @@
 </div>
 </br>
 
-	<div layout="row" layout-align="space-around center" ng-show="vm.schoolHasBeenSelected">
+	<div layout="row" layout-align="space-around center" ng-hide="vm.loadingClasses">
 		<div flex="90" >
 
 			<md-autocomplete 
@@ -43,7 +43,7 @@
 			          placeholder="Enter the course name">
 
 			        <md-item-template>
-			          <span md-highlight-text="vm.searchClass" md-highlight-flags="^i">{{item.value}}</span>
+			          <span md-highlight-text="vm.searchClass" md-highlight-flags="^i">{{item.display}}</span>
 			        </md-item-template>
 					  <md-not-found>
 			          No states matching "{{vm.searchClass}}" were found.
@@ -54,10 +54,9 @@
 	</div>
 </br>
 
-<div ng-show="vm.classHasBeenSelected" ng-repeat="exam in vm.exams">
+<div ng-hide="vm.loadingExams" ng-repeat="exam in vm.exams">
   <exam-directive exam="exam"></exam-directive>
 </div>
 
 </md-whiteframe>
-
 

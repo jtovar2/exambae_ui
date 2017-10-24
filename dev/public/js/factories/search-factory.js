@@ -1,5 +1,5 @@
 (function(app) {
-	app.factory('SearchFactory', [function() {
+	app.factory('SearchFactory', ['$q', '$http', function($q, $http) {
 
 
 		var services = {
@@ -9,31 +9,56 @@
                 getExams: getExams
             };
 
+        var qa_base_address = "http://demolisherapp.appspot.com";
+
+
+        function success(data) {
+
+            console.log(data);
+
+            return $q.resolve(data.data);
+        }
+
+        function error(error) {
+            console.log(error);
+            console.log("There was an error");
+
+
+            return $q.reject(error);
+        }
+
         function getSchools()
         {
+
+            var get_schools_path = '/frontend/get_schools';
+
+            
+
         	var schools = ['Georgia State University', 'University of Georgia', 'Clayton State University', 'Georgia Southern']
-        	return schools.map( function (school) {
+        	/*return schools.map( function (school) {
 				        return {
 				          value: school.toLowerCase(),
 				          display: school
 				        };
-    			})
+    			})*/
+            return $http.get(qa_base_address + get_schools_path).then(success, error);
         }
 
         function getClasses(school)
         {
-        	var classes = ['PHYS1001', 'PHYS1001', 'CSC4101', 'CSC3000'];
-        	return classes.map( function (school) {
-				        return {
-				          value: school.toLowerCase(),
-				          display: school
-				        };
-    			})
+
+            var get_classes_path = '/frontend/school/' + school.display + '/get_classes'
+            return $http.get(qa_base_address + get_classes_path).then(success, error);
+
+
         }
 
         function getExams(school, classname)
         {
-        	return [{'description': 'calc 1 test'}, {'description': 'calc 1 test'}, {'description': 'calc 1 test'}];
+            var get_exams_path =  '/frontend/school/' + school.display + '/class/' + classname.display + '/get_resources';
+
+            return $http.get(qa_base_address + get_exams_path).then(success, error);
+
         }
 
 

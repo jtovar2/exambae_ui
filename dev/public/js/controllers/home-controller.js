@@ -2,15 +2,16 @@
 	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
 		 var vm = this;
 
-     vm.exams = [];
+     vm.loadingExams = true;
+     vm.exams = [ {"description" : 'test1'} ];
 
 
-	vm.loading = false;
+	vm.loadingSchools = true;
 	vm.isSchoolSearchDisabled = false;
     vm.isSchoolCacheDisabled = false;
 
 	vm.schoolHasBeenSelected = false;
-	vm.schools = SearchFactory.getSchools();
+	vm.schools = SearchFactory.getSchools().then(updateLoadingSchools);
 	vm.searchSchool = "";
 	vm.selectedSchool = "";
 	vm.selectedSchoolChange = selectedSchoolChange;
@@ -19,11 +20,19 @@
 	vm.schoolQuerySearch = schoolQuerySearch;
 
 
+  function updateLoadingSchools(data) {
+    vm.loadingSchools = false;
+    console.log(data);
+    console.log(vm.loadingSchools);
+    return data;
+  }
     function searchSchoolChange(text) {
 
+      vm.loadingClasses = true;
+      vm.loadingExams = true;
     	vm.schoolHasBeenSelected = false;
-    	console.log("search method");
-    	console.log(vm);
+
+
     }
 
     function selectedSchoolChange(item) {
@@ -33,10 +42,13 @@
     		vm.schoolHasBeenSelected = false;
         vm.classHasBeenSelected = false;
         vm.selectedClass = "";
+        vm.loadingClasses = true;
+        vm.loadingExams = true;
     	}
     	else
     	{
     		vm.schoolHasBeenSelected = true;
+        vm.schoolClasess = SearchFactory.getClasses(vm.selectedSchool).then(updateLoadingClasses);
     	}
     	console.log("selection method");
     	console.log(vm);
@@ -48,39 +60,56 @@
         return results;
 
     }
+
+    vm.loadingClasses = true;
     vm.isClassSearchDisabled = false;
     vm.isClassCacheDisabled = false;
     vm.classHasBeenSelected = false;
     vm.searchClass = "";
     vm.classQuerySearch = classQuerySearch;
-	vm.schoolClasess = SearchFactory.getClasses();
+	vm.schoolClasess = [];
 	vm.selectedClass = "";
 	vm.selectedClassChange = selectedClassChange;
 	vm.searchClassChange = searchClassChange;
 
+
+
 	
 
-
+    function updateLoadingClasses(data) {
+    vm.loadingClasses = false;
+    console.log(data);
+    return data;
+    }
     function searchClassChange(text) {
 
     	vm.classHasBeenSelected = false;
+      vm.loadingExams = true;
     }
 
     function selectedClassChange(item) {
       if(vm.selectedClass === null || vm.selectedClass === "")
       {
         vm.classHasBeenSelected = false
+        vm.loadingExams = true;
       }
       else
       {
         vm.classHasBeenSelected = true;
+        SearchFactory.getExams(vm.selectedSchool, vm.selectedClass).then(updateLoadingExams);
       }
 
-      if(vm.schoolHasBeenSelected && vm.classHasBeenSelected)
-      {
-        vm.exams = SearchFactory.getExams(vm.selectedSchool, vm.selectedClass);
-      }
 
+
+    }
+
+    function updateLoadingExams(data)
+    {
+      vm.loadingExams = false;
+      console.log(vm.loadingExams);
+      console.log(data);
+      vm.exams = data;
+      return data;
     }
 
     function classQuerySearch (query) {

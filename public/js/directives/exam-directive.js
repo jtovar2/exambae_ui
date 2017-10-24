@@ -5,6 +5,7 @@
 				exam: '='
 			},
 			controller: function($scope, $element, $attrs, $transclude) {
+
 				$scope.uploadFile = function(){
 				console.log("uploading");
             	var file = $scope.blob;
