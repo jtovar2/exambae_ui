@@ -1,7 +1,8 @@
 <md-card>
  <md-card-content>
    <h2>{{exam.description}}</h2>
-   <p>{{exam.professor}}</p>
+   <p>Professor: {{exam.professor}}</p>
+   <p>Number of Downloads: {{exam.number_of_downloads}}</p>
  </md-card-content>
  <div ng-if="exam.free_or_nah">
  <md-card-footer>

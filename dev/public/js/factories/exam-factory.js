@@ -3,6 +3,7 @@
 
 		var services = {
 			getExam: getExam,
+            getExamWithSecret: getExamWithSecret,
 			postExam: postExam,
 
             getUploadUrl: getUploadUrl,
@@ -56,10 +57,14 @@
         {
 
             var get_exam_path = '/exam/' + exam_id;
+  
+            return $http.get(qa_base_address + get_exam_path).then(success, error);
+        }
 
-            
+        function getExamWithSecret(exam_id, secret)
+        {
 
-        
+            var get_exam_path = '/exam/' + exam_id + '/secret/' + secret;
   
             return $http.get(qa_base_address + get_exam_path).then(success, error);
         }
