@@ -66,7 +66,6 @@
 
         function postExam(exam)
         {
-            console.log("WTFFF");
             var post_exam_path = '/exam';
 
             

@@ -1,5 +1,5 @@
 (function(app) {
-	app.controller('newexamController', ['$scope', 'ExamFactory', function($scope, ExamFactory) {
+	app.controller('newexamController', ['$scope', 'ExamFactory', '$state', function($scope, ExamFactory, $state) {
 		var vm = this;
 
 		vm.NO_FILE_UPLOADED = "NO_FILES";
@@ -41,17 +41,13 @@
 		function updateBlobKey(data)
 		{
 			vm.exam.file = data.blob_key;
-			console.log(vm.exam.file);
 			vm.fileUploaded = true;
 		}
 
 		function updateUploadUrl(data)
 		{
 			vm.uploadUrlLoading = false;
-			console.log("upload urllzzzz");
-			console.log(data);
 			vm.uploadUrl = data;
-			console.log("*********");
 		}
 
 		function deleteFile()
@@ -62,7 +58,21 @@
 
 		function postExam()
 		{
-			ExamFactory.postExam(vm.exam);
+			ExamFactory.postExam(vm.exam).then(goToExamReceipt);
+		}
+
+
+		function goToExamReceipt(data)
+		{
+			if('secret' in data && 'id' in data)
+			{
+				$state.go('examreceipt', {'examId' : data.id, 'secret': data.secret});
+			}
+			else
+			{
+				console.log("WTFFF");
+				console.log(data);
+			}
 		}
 
 

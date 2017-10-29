@@ -5,7 +5,13 @@ var exambae = angular.module('exambae', ['ngMaterial', 'ngAnimate', 'ngMessages'
 
         $urlRouterProvider.otherwise('/');
 
-        $stateProvider.state('newexam', {
+        $stateProvider.state('examreceipt', {
+		url: '/exam/:examId/secret/:secret',
+		templateUrl: 'partials/examreceipt-partial.html',
+		controller: 'examreceiptController'
+	})
+
+	.state('newexam', {
 		url: '/newexam',
 		templateUrl: 'partials/newexam-partial.html',
 		controller: 'newexamController',
