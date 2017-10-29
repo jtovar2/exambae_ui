@@ -5,26 +5,35 @@
 
       <form name="vm.metaDataForm">
 
+        <div layout-gt-sm="row" flex="100">
+        <md-input-container class="md-block" flex="100">
+          <label>School</label>
+          <input required name="school" ng-model="vm.exam.school">
+          <div ng-messages="metaDataForm.description.$error">
+              <div ng-message="md-minlength">School name must be 5 characters long.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
-            <label>School</label>
-            <input required name="school" ng-model="vm.exam.school">
-            <div ng-messages="metaDataForm.description.$error">
-          		<div ng-message="md-minlength">School name must be 5 characters long.</div>
-        	</div>
+            <labeL>Professor</label>
+              <input name="professor" ng-model="vm.exam.professor">
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>Class</label>
-            <input required name="schoolClass" ng-model="vm.exam.class">
+            <input required name="school_class" ng-model="vm.exam.school_class">
           </md-input-container>
         </div>
-    
+        
+        
 
         <div layout-gt-sm="row" flex="100">
         <md-input-container class="md-block" flex="100">
           <label>Description</label>
-          <textarea ng-minlength="30" name="schoolDescription" ng-model="vm.exam.description"  md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea ng-minlength="30" name="description" ng-model="vm.exam.description"  md-maxlength="150" rows="5" md-select-on-focus></textarea>
         </md-input-container>
 	    </div>
 
@@ -42,19 +51,19 @@
       </form>
 
       
-      	<div layout="column" flex="50" layout-align="center center">
+      	<div layout="column" flex="50" layout-align="center center" ng-hide="vm.uploadUrlLoading">
         <md-content flex="100" ng-hide="vm.fileUploaded">
-	        <input id="fileInput" name="file" type="file" class="ng-hide" file-model="blob">
-			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Upload Your File</md-button>
+          <input type="file" file-input="file" id="file"/>
+			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Upload</md-button>
     	</md-content>
     	<md-content flex="100" ng-show="vm.fileUploaded">
 
-			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Cancel Upload<md-icon ng-bind="'delete'"></md-icon></md-button>
+			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.deleteFile()">Cancel Upload<md-icon ng-bind="'delete'"></md-icon></md-button>
     	</md-content>
 	    </div>
     </div>
 
-<md-button class="md-raised md-accent"  ng-click="vm.uploadFile()">Submit</md-button>
+<md-button class="md-raised md-accent"  ng-click="vm.postExam()">Submit</md-button>
 	
 
 </md-content>

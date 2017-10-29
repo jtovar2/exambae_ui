@@ -55,7 +55,7 @@
 
         function getExams(school, classname)
         {
-            var get_exams_path =  '/frontend/school/' + school.display + '/class/' + classname.display + '/get_resources';
+            var get_exams_path =  '/frontend/school/' + school.display + '/school_class/' + classname.display + '/get_resources';
 
             return $http.get(qa_base_address + get_exams_path).then(success, error);
 
