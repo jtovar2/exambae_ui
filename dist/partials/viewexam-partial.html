@@ -1,0 +1,18 @@
+<div ng-controller="viewexamController">
+<md-content layout-padding ng-hide="vm.loading">
+	<md-whiteframe class="md-whiteframe-21dp" flex="90" layout="column" layout-align="space-around ">
+	School: {{vm.exam.school}}
+	<br>
+	Class: {{vm.exam.school_class}}
+	<br>
+	Professor: {{vm.exam.professor}}
+	<br>
+	Description: {{vm.exam.description}}
+	<br>
+	<md-button ng-show="vm.exam.free_or_nah" class="md-raised md-accent"  ng-href="{{vm.downloadLink}}">Download<md-button>
+	</md-whiteframe>
+
+
+</md-content>
+
+</div>

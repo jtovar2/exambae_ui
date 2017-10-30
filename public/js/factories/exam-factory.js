@@ -8,7 +8,8 @@
 
             getUploadUrl: getUploadUrl,
             deleteBlob: deleteBlob,
-            createBlob: createBlob
+            createBlob: createBlob,
+            getBlobDownloadUrl: getBlobDownloadUrl
 
 
 		}
@@ -29,6 +30,11 @@
             return $q.reject(error);
         }
 
+
+        function getBlobDownloadUrl(blobKey)
+        {
+            return qa_base_address + '/blob/' + blobKey;
+        }
         function createBlob(file, uploadUrl)
         {
 

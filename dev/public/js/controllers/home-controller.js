@@ -11,7 +11,8 @@
     vm.isSchoolCacheDisabled = false;
 
 	vm.schoolHasBeenSelected = false;
-	vm.schools = SearchFactory.getSchools().then(updateLoadingSchools);
+	vm.schools = [];
+  SearchFactory.getSchools().then(updateLoadingSchools);
 	vm.searchSchool = "";
 	vm.selectedSchool = "";
 	vm.selectedSchoolChange = selectedSchoolChange;
@@ -24,13 +25,15 @@
     vm.loadingSchools = false;
     console.log(data);
     console.log(vm.loadingSchools);
-    return data;
+    vm.schools = data;
   }
     function searchSchoolChange(text) {
 
       vm.loadingClasses = true;
       vm.loadingExams = true;
     	vm.schoolHasBeenSelected = false;
+
+      vm.schoolClasses = [];
 
 
     }
@@ -44,18 +47,21 @@
         vm.selectedClass = "";
         vm.loadingClasses = true;
         vm.loadingExams = true;
+
+        vm.schoolClasses = [];
     	}
     	else
     	{
     		vm.schoolHasBeenSelected = true;
-        vm.schoolClasess = SearchFactory.getClasses(vm.selectedSchool).then(updateLoadingClasses);
+        SearchFactory.getClasses(vm.selectedSchool).then(updateLoadingClasses);
     	}
     	console.log("selection method");
     	console.log(vm);
     }
 
     function schoolQuerySearch (query) {
-      var results = query ? vm.schools.filter( createFilterFor(query) ) : vm.schools;
+      console.log(vm.schools);
+      var results = query || query == "" ? vm.schools.filter( createFilterFor(query) ) : vm.schools;
 
         return results;
 
@@ -63,11 +69,11 @@
 
     vm.loadingClasses = true;
     vm.isClassSearchDisabled = false;
-    vm.isClassCacheDisabled = false;
+    vm.isClassCacheDisabled = true;
     vm.classHasBeenSelected = false;
     vm.searchClass = "";
     vm.classQuerySearch = classQuerySearch;
-	vm.schoolClasess = [];
+	vm.schoolClasses = [];
 	vm.selectedClass = "";
 	vm.selectedClassChange = selectedClassChange;
 	vm.searchClassChange = searchClassChange;
@@ -79,10 +85,10 @@
     function updateLoadingClasses(data) {
     vm.loadingClasses = false;
     console.log(data);
-    return data;
+    vm.schoolClasses = data;
     }
     function searchClassChange(text) {
-
+      console.log(vm.schoolClasses);
     	vm.classHasBeenSelected = false;
       vm.loadingExams = true;
     }
@@ -113,8 +119,10 @@
     }
 
     function classQuerySearch (query) {
-      var results = query ? vm.schoolClasess.filter( createFilterFor(query) ) : vm.schoolClasess;
-
+      console.log(query);
+      var results = query || query == "" ? vm.schoolClasses.filter( createFilterFor(query) ) : vm.schoolClasses;
+      console.log("results");
+      console.log(results);
         return results;
     }
 

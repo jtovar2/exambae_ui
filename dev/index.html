@@ -22,7 +22,7 @@
           <div flex="25" ng-hide="vm.state != 'home'" >
               <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>
         </div>
-        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt'" >
+        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt' && vm.state != 'viewexam'" >
               <md-button aria-label="Learn More" ui-sref="home">Get back to schemin'</md-button>
         </div>
     
@@ -45,6 +45,7 @@
     <script src="/public/js/controllers/header-controller.js"></script>
     <script src="/public/js/controllers/home-controller.js"></script>
     <script src="/public/js/controllers/newexam-controller.js"></script>
+    <script src="/public/js/controllers/viewexam-controller.js"></script>
     <script src="/public/js/directives/error-directive.js"></script>
     <script src="/public/js/directives/exam-directive.js"></script>
     <script src="/public/js/directives/loading-directive.js"></script>
