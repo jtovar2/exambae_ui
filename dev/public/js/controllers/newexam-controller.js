@@ -53,12 +53,15 @@
 		function deleteFile()
 		{
 			ExamFactory.deleteBlob(vm.exam.file);
+			vm.exam.file = "";
 			vm.fileUploaded = false;
 		}
 
 		function postExam()
 		{
 			ExamFactory.postExam(vm.exam).then(goToExamReceipt);
+
+
 		}
 
 

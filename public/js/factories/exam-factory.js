@@ -14,6 +14,7 @@
 
 		}
 		var qa_base_address = "http://demolisherapp.appspot.com";
+        var pr_base_address = "";
 
 		function success(data) {
 

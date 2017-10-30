@@ -8,10 +8,13 @@
         <div layout-gt-sm="row" flex="100">
         <md-input-container class="md-block" flex="100">
           <label>School</label>
-          <input required name="school" ng-model="vm.exam.school">
-          <div ng-messages="metaDataForm.description.$error">
-              <div ng-message="md-minlength">School name must be 5 characters long.</div>
+          <input required ng-minlength="5" name="school" ng-model="vm.exam.school">
+          <div ng-messages="vm.metaDataForm.school.$error">
+              
+              <div ng-message="required">A school is required.</div>
+              <div ng-message="minlength">School name must be longer than 5 characters.</div>
           </div>
+
         </md-input-container>
       </div>
 
@@ -19,12 +22,20 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <labeL>Professor</label>
-              <input name="professor" ng-model="vm.exam.professor">
+              <input required name="professor" ng-minlength="2" ng-model="vm.exam.professor">
+              <div ng-messages="vm.metaDataForm.professor.$error">
+                <div ng-message="minlength">A professor name must be longer than 2 characters.</div>
+                <div ng-message="required">A proffesor name is required</div>
+               </div> 
           </md-input-container>
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>Class</label>
             <input required name="school_class" ng-model="vm.exam.school_class">
+            <div ng-messages="vm.metaDataForm.school_class.$error">
+              
+              <div ng-message="required">A school class is required.</div>
+            </div>
           </md-input-container>
         </div>
         
@@ -33,7 +44,11 @@
         <div layout-gt-sm="row" flex="100">
         <md-input-container class="md-block" flex="100">
           <label>Description</label>
-          <textarea ng-minlength="30" name="description" ng-model="vm.exam.description"  md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <textarea required ng-minlength="15" name="description" ng-model="vm.exam.description"  md-maxlength="150" rows="5" md-select-on-focus></textarea>
+          <div ng-messages="vm.metaDataForm.description.$error">
+              <div ng-message="minlength">The description must be longer than 15 characters.</div>
+              <div ng-message="required">A description is required.</div>
+          </div>
         </md-input-container>
 	    </div>
 
@@ -62,9 +77,15 @@
     	</md-content>
 	    </div>
     </div>
+    <div layout="row">
+      
+    </div>
 
-<md-button class="md-raised md-accent"  ng-click="vm.postExam()">Submit</md-button>
-	
+
+
+<md-button class="md-raised md-accent" ng-disabled="vm.metaDataForm.$invalid || vm.exam.file == '' "  ng-click="vm.postExam()">Submit</md-button>
+
+
 
 </md-content>
 
