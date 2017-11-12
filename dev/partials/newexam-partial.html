@@ -1,4 +1,4 @@
-	
+  
 <div ng-controller="newexamController" layout="row" layout-fill>
 
 <md-content layout="column" flex="100">
@@ -50,35 +50,49 @@
               <div ng-message="required">A description is required.</div>
           </div>
         </md-input-container>
-	    </div>
+      </div>
 
-	    <div layout="row">
-		<div layout="column" flex="50">
 
-        	<md-input-container class="md-block" flex="100">
-        		<label>Resource Price in USD<md-icon ng-bind="'attach_money'"></md-icon></label>
-        		<div layout="row" flex="100">
-				<input ng-model="vm.exam.price" name="price" type="number" min="0.00" step="0.01" max="2500" >
-				</div>
-    		</md-input-container>
-    		<p ng-show="vm.exam.price === 0.0">ITS FREE!!!<md-icon ng-bind="'accessibility'"></md-icon></p>
-    	</div>
+      <div layout-gt-sm="row" flex="100">
+        <md-chips  flex="100" ng-model="vm.exam.tags" name="tags" readonly="vm.tagsReadonlyToggle"
+                md-removable="vm.tagsRemovable" md-max-chips="5" placeholder="Enter a tags...">
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+      </md-content>
+      </div>
+
+      <br>
+      <br>
+
+      <div layout="row">
+    <div layout="column" flex="50">
+
+          <md-input-container class="md-block" flex="100">
+            <label>Resource Price in USD<md-icon ng-bind="'attach_money'"></md-icon></label>
+            <div layout="row" flex="100">
+        <input ng-model="vm.exam.price" name="price" type="number" min="0.00" step="0.01" max="2500" >
+        </div>
+        </md-input-container>
+        <p ng-show="vm.exam.price === 0.0">ITS FREE!!!<md-icon ng-bind="'accessibility'"></md-icon></p>
+      </div>
       </form>
 
       
-      	<div layout="column" flex="50" layout-align="center center" ng-hide="vm.uploadUrlLoading">
+        <div layout="column" flex="50" layout-align="center center" ng-hide="vm.uploadUrlLoading">
         <md-content flex="100" ng-hide="vm.fileUploaded">
           <input type="file" file-input="file" id="file"/>
-			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Upload</md-button>
-    	</md-content>
-    	<md-content flex="100" ng-show="vm.fileUploaded">
+      <md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Upload</md-button>
+      </md-content>
+      <md-content flex="100" ng-show="vm.fileUploaded">
 
-			<md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.deleteFile()">Cancel Upload<md-icon ng-bind="'delete'"></md-icon></md-button>
-    	</md-content>
-	    </div>
+      <md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.deleteFile()">Cancel Upload<md-icon ng-bind="'delete'"></md-icon></md-button>
+      </md-content>
+      </div>
     </div>
     <div layout="row">
-      
     </div>
 
 
@@ -87,7 +101,6 @@
 
 
 
-</md-content>
 
 
 </div>

@@ -13,21 +13,36 @@
 <body ng-app="exambae" ng-cloak>
     <div ng-controller="HeaderController as vm">
     <md-toolbar class="md-tall md-accent">
-    
+    <div layout="row">
 
+    <md-menu>
+      <md-button ng-click="vm.openMenu($mdOpenMenu, $event)"><md-icon ng-bind="'menu'" ></md-icon></md-button>
+      <!--<md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdMenu, $event)">
+        <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon>
+      </md-button>-->
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ui-sref='checktransactions'>
+            Check past transactions
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+    
       <h1 class="md-toolbar-tools" ui-sref="newexam">
         <span>ExamBae 
             <md-icon ng-bind="'favorite'"></md-icon></span>
       </h1>
+    </div>
           <div flex="25" ng-hide="vm.state != 'home'" >
               <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>
         </div>
-        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt' && vm.state != 'viewexam'" >
+        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt' && vm.state != 'viewexam' && vm.state != 'checktransactions'" >
               <md-button aria-label="Learn More" ui-sref="home">Get back to schemin'</md-button>
         </div>
     
-
     </md-toolbar>
+    
     </div>
 
     <div ui-view></div>
@@ -39,8 +54,10 @@
     <script src="/bower_components/angular-messages/angular-messages.min.js"></script>
     <script src="/bower_components/angular-ui-router/angular-ui-router.min.js"></script>
     <script src="/public/js/config/app.js"></script>
+    <script src="/public/js/factories/bitcoinApi-factory.js"></script>
     <script src="/public/js/factories/exam-factory.js"></script>
     <script src="/public/js/factories/search-factory.js"></script>
+    <script src="/public/js/controllers/checktransactions-controller.js"></script>
     <script src="/public/js/controllers/examreceipt-controller.js"></script>
     <script src="/public/js/controllers/header-controller.js"></script>
     <script src="/public/js/controllers/home-controller.js"></script>
@@ -50,6 +67,7 @@
     <script src="/public/js/directives/exam-directive.js"></script>
     <script src="/public/js/directives/loading-directive.js"></script>
     <script src="/public/js/directives/success-directive.js"></script>
+    <script src="/public/js/directives/transaction-directive.js"></script>
     <!-- endinject -->
 </body>
 

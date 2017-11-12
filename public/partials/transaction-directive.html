@@ -1,0 +1,14 @@
+<md-card >
+ <md-card-content>
+   <h2>Paid to address: {{transaction.exam_bitcoin_address}}</h2>
+   <p>State: {{transaction.state}}</p>
+   <p>Amount: {{transaction.amount}}</p>
+ </md-card-content>
+
+<div ng-if="transaction.state != 'NOT CONFIRMED'">
+ <md-card-footer>
+   <md-button class="md-raised md-accent"   ng-href="{{downloadLink}}">Download</md-button>
+ </md-card-footer>
+</div>
+
+</md-card>

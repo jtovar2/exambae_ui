@@ -3,6 +3,7 @@
 
 <head>
     <title>exambae</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- inject:css -->
     <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="/public/css/app.css">
@@ -10,14 +11,40 @@
 </head>
 
 <body ng-app="exambae" ng-cloak>
-    <h1 class="md-display-1 text-center">Exam Bae</h1>
-    <div class="text-center"><md-icon md-svg-src="/public/images/angular-logo.svg" aria-label="Angular"></md-icon></div>
-    <md-content class="md-padding" layout="row" layout-align="center">
-        <md-nav-bar md-selected-nav-item="" nav-bar-aria-label="navigation links">
-            <md-nav-item md-nav-sref="home" name="home">Home</md-nav-item>
-            <md-nav-item md-nav-sref="about" name="about">About</md-nav-item>
-        </md-nav-bar>
-    </md-content>
+    <div ng-controller="HeaderController as vm">
+    <md-toolbar class="md-tall md-accent">
+    <div layout="row">
+
+    <md-menu>
+      <md-button ng-click="vm.openMenu($mdOpenMenu, $event)"><md-icon ng-bind="'menu'" ></md-icon></md-button>
+      <!--<md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdMenu, $event)">
+        <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon>
+      </md-button>-->
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ui-sref='checktransactions'>
+            Check past transactions
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+    
+      <h1 class="md-toolbar-tools" ui-sref="newexam">
+        <span>ExamBae 
+            <md-icon ng-bind="'favorite'"></md-icon></span>
+      </h1>
+    </div>
+          <div flex="25" ng-hide="vm.state != 'home'" >
+              <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>
+        </div>
+        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt' && vm.state != 'viewexam' && vm.state != 'checktransactions'" >
+              <md-button aria-label="Learn More" ui-sref="home">Get back to schemin'</md-button>
+        </div>
+    
+    </md-toolbar>
+    
+    </div>
+
     <div ui-view></div>
     <!-- inject:js -->
     <script src="/bower_components/angular/angular.min.js"></script>

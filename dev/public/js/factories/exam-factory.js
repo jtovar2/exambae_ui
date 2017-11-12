@@ -9,7 +9,11 @@
             getUploadUrl: getUploadUrl,
             deleteBlob: deleteBlob,
             createBlob: createBlob,
-            getBlobDownloadUrl: getBlobDownloadUrl
+            getBlobDownloadUrl: getBlobDownloadUrl,
+
+
+            payForExam: payForExam
+
 
 
 		}
@@ -84,6 +88,13 @@
 
         
               return $http.post(qa_base_address + post_exam_path, exam).then(success, error);
+        }
+
+        function payForExam(payment)
+        {
+            var pay_for_exam_path = '/pay_for_exam';
+
+            return $http.post(qa_base_address + pay_for_exam_path, payment).then(success, error);
         }
 
 		return services;

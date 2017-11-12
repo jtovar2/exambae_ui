@@ -130,6 +130,57 @@
 	
 
 
+  vm.loadingTags = true;
+  vm.isTagSearchDisabled = false;
+    vm.isTagCacheDisabled = false;
+
+  vm.tagHasBeenSelected = false;
+  vm.tags = [];
+  SearchFactory.getTags().then(updateLoadingTags);
+  vm.searchTag = "";
+  vm.selectedTag = "";
+  vm.selectedTagChange = selectedTagChange;
+  vm.searchTagChange = searchTagChange;
+
+  vm.tagQuerySearch = tagQuerySearch;
+
+
+  function updateLoadingTags(data) {
+    vm.loadingTags = false;
+    console.log(data);
+    console.log(vm.loadingTags);
+    vm.tags = data;
+  }
+    function searchTagChange(text) {
+
+      vm.loadingClasses = true;
+      vm.loadingExams = true;
+      vm.tagHasBeenSelected = false;
+
+
+
+    }
+
+    function selectedTagChange(item) {
+
+
+      console.log(item);
+      if(item != null)
+      {
+        SearchFactory.getExamsByTag(item).then(updateLoadingExams);
+      }
+
+    }
+
+    function tagQuerySearch (query) {
+      console.log(vm.tags);
+      var results = query || query == "" ? vm.tags.filter( createFilterFor(query) ) : vm.tags;
+
+        return results;
+
+    }
+
+
 
 	
 

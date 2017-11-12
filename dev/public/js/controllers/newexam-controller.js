@@ -1,6 +1,10 @@
 (function(app) {
 	app.controller('newexamController', ['$scope', 'ExamFactory', '$state', function($scope, ExamFactory, $state) {
 		var vm = this;
+		console.log("shubin learning today");
+		vm.tagsReadonlyToggle = false;
+		vm.tagsRemovable = true;
+
 
 		vm.NO_FILE_UPLOADED = "NO_FILES";
 		vm.FILE_UPLOADED = "FILE";
@@ -59,6 +63,12 @@
 
 		function postExam()
 		{
+
+			if(vm.exam.price > 0.0)
+			{
+				vm.exam.free_or_nah = false;
+			}
+
 			ExamFactory.postExam(vm.exam).then(goToExamReceipt);
 
 
