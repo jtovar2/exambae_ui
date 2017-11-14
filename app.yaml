@@ -3,19 +3,27 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /(.+)
-  static_files: dist/\1
-  upload: dist/.*
+- url: /bower_components
+  static_dir: dev/bower_components
+
+- url: /partials
+  static_dir: dev/partials
+
+- url: /public
+  static_dir: dev/public
+
+- url: /.*
+  static_files: dev/index.html
+  upload: dev/index.html
 
 - url: /
-  static_files: dist/index.html
-  upload: dist/index.html
+  static_files: dev/index.html
+  upload: dev/index.html
 
 skip_files:
 - node_modules/
 - bower_components/
-- dev/
 - public/
 - spec/
 - scss/
-
+- .git/
