@@ -51,7 +51,7 @@ gulp.task('serve', ['init'], function() {
 gulp.task('index', function() {
     var target = gulp.src('./dev/index.html');
     
-    var file_sources = [ './public/js/config/app.js', './public/js/factories/**/*.js',
+    var file_sources = [ './public/js/config/app.js', './public/js/config/config.js', './public/js/factories/**/*.js',
     './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
     
     var bower_css = mainBowerFiles('**/*.css'); 
@@ -67,6 +67,7 @@ gulp.task('index', function() {
 });
 
 gulp.task('html', function() {
+    console.log("we in html ");
     return gulp.src('./public/**/*.html')
         .pipe(gulp.dest('./dev'))
         .pipe(gulp.dest('./dist'))
@@ -133,7 +134,7 @@ gulp.task('image-min', function() {
 });
 
 gulp.task('uglify-js', function() {
-    return gulp.src(['./public/js/config/app.js', './public/js/factories/**/*.js', './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js'])
+    return gulp.src(['./public/js/config/app.js' ,'./public/js/config/config.js' , './public/js/factories/**/*.js', './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js'])
         .pipe(concat('all.min.js'))
         .pipe(gulp.dest('./public/js/min/'))
         .pipe(uglify())
