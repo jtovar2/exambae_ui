@@ -12,6 +12,9 @@ var iife = require("gulp-iife");
 var cleanCSS = require('gulp-clean-css');
 var Server = require('karma').Server;
 
+var mainBowerFiles = require('main-bower-files');
+
+
 gulp.task('default', ['serve']);
 
 gulp.task('init', ['sass', 'bower', 'js', 'uglify-js', 'image', 'image-min', 'html', 'index']);
@@ -47,7 +50,17 @@ gulp.task('serve', ['init'], function() {
 
 gulp.task('index', function() {
     var target = gulp.src('./dev/index.html');
-    var sources = gulp.src(['./bower_components/**/*.js', './public/js/config/app.js', './public/js/factories/**/*.js', './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './bower_components/**/*.css', './public/css/**/*.css'], { read: false });
+    
+    var file_sources = [ './public/js/config/app.js', './public/js/factories/**/*.js',
+    './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
+    
+    var bower_css = mainBowerFiles('**/*.css'); 
+    var bower_js = mainBowerFiles('**/*.js');
+
+    var sources_list = bower_js.concat(bower_css);
+    sources_list = sources_list.concat(file_sources);
+
+    var sources = gulp.src(sources_list, {read: false}); 
 
     return target.pipe(inject(sources))
         .pipe(gulp.dest('./dev'))
@@ -84,7 +97,9 @@ gulp.task('js', function() {
 });
 
 gulp.task('bower', ['index', 'index:dist'], function() {
-    return gulp.src(['./bower_components/**/*.min.js', './bower_components/**/*.min.css'])
+    var bowerFiles = mainBowerFiles('**/*.js');
+      console.log('bower files: ', bowerFiles);
+    return gulp.src(mainBowerFiles('**/*.js'))
         .pipe(gulp.dest('./dev/bower_components'))
         .pipe(gulp.dest('./dist/bower_components'));
 });

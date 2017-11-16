@@ -1,17 +1,9 @@
 {
-  "name": "yeoman-generator-angular-material",
-  "homepage": "https://github.com/iansawyerva/generator-angular-material",
+  "name": "exambae",
   "authors": [
-    "Ian Sawyer"
+    "Javier tovar"
   ],
-  "description": "Google's Angular Material Yeoman Generator",
   "main": "",
-  "keywords": [
-    "Angular",
-    "Material",
-    "Yeoman",
-    "Google"
-  ],
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -22,5 +14,15 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "^1.6.6",
+    "angular-animate": "^1.6.6",
+    "angular-aria": "^1.6.6",
+    "angular-material": "^1.1.5",
+    "angular-messages": "^1.6.6",
+    "angular-ui-router": "^1.0.11",
+    "material-steppers": "^2.0.0",
+    "md-steppers": "^0.3.4",
+    "polymer": "^2.2.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.17"
   }
 }

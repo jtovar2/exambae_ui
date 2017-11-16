@@ -42,5 +42,6 @@
     "karma-phantomjs-launcher": "1.x || ^0.2.0"
   },
   "dependencies": {
+    "main-bower-files": "^2.13.1"
   }
 }
