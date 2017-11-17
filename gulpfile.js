@@ -14,10 +14,84 @@ var Server = require('karma').Server;
 
 var mainBowerFiles = require('main-bower-files');
 
+var env_vars = require('./env_vars.json');
 
 gulp.task('default', ['serve']);
 
-gulp.task('init', ['sass', 'bower', 'js', 'uglify-js', 'image', 'image-min', 'html', 'index']);
+gulp.task('init', ['lcp', 'sass', 'bower', 'js', 'uglify-js', 'image', 'image-min', 'html', 'index' ]);
+// LCP stuff QA
+//Stuff for turning string to file
+function string_src(filename, string) {
+    var src = require('stream').Readable({ objectMode: true })
+    src._read = function () {
+        this.push(new gutil.File({
+            cwd: "",
+            base: "",
+            path: filename,
+            contents: new Buffer(string)
+            }))
+            this.push(null)
+        }
+        return src;
+}
+gulp.task('lcp', function() {
+    
+    var APP_NAME = "exambae";
+    var CONFIG_PATH = "js/config/config.js";
+    var LCP = env_vars.LCP;
+
+    var js_clousure_template = "( function(app) { %APP_CONSTANTS% } ) (%APP_NAME%);";
+    var js_constant_template = "app.constant( '%ENV_NAME%' , '%ENV_VALUE%');\n"
+    var lcp_stuff = env_vars;
+    
+
+    js_all_constants_code = "";
+
+    for (var env_name in lcp_stuff)
+    {
+        var env_value = lcp_stuff[env_name];
+
+        var env_template_dict = {};
+
+        env_template_dict['%ENV_NAME%'] =  env_name;
+        env_template_dict['%ENV_VALUE%'] = env_value;
+
+        var js_constant = js_constant_template.replace(/%\w+%/g, function(all) {
+           return env_template_dict[all] || all;
+           });
+        console.log(js_constant);
+
+        js_all_constants_code = js_all_constants_code + js_constant;
+    }
+
+    console.log(js_all_constants_code);
+
+
+    var env_template_dict = {};
+    env_template_dict['%APP_CONSTANTS%'] = js_all_constants_code;
+    env_template_dict['%APP_NAME%'] = "exambae";
+
+    var config_js = js_clousure_template.replace(/%\w+%/g, function(all) {
+               return env_template_dict[all] || all;
+               });
+
+
+    console.log("\n");
+    console.log(config_js);
+
+    if( LCP.toUpperCase() === "PR")
+    {
+    return string_src(CONFIG_PATH , config_js)
+        .pipe(gulp.dest('./dist'));
+    }
+
+    else
+    {
+    return string_src(CONFIG_PATH, config_js)
+            .pipe(gulp.dest('./public'));
+    }
+
+});
 
 // Static Server + watching js/scss/html files
 gulp.task('serve', ['init'], function() {
@@ -184,7 +258,7 @@ gulp.task('serve:dist', ['dist:package'], function() {
     gulp.watch('./bower_components/**/*.js', ['bower']);
 });
 
-gulp.task('dist:package', ['sass', 'bower', 'uglify-js', 'image', 'image-min', 'html', 'dist:iife', 'index:dist']);
+gulp.task('dist:package', ['lcp','sass', 'bower', 'uglify-js', 'image', 'image-min', 'html', 'dist:iife', 'index:dist']);
 
 
 //TDD

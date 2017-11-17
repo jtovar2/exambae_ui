@@ -1,5 +1,5 @@
 (function(app) {
-	app.factory('bitcoinApiFactory', ['$q', '$http', function($q, $http) {
+	app.factory('bitcoinApiFactory', ['$q', '$http', 'HOSTNAME', function($q, $http, HOSTNAME) {
 
 
 		var services = {
@@ -7,7 +7,7 @@
             getTransactions : getTransactions
 		}
 
-        var qa_base_address = "http://demolisherapp.appspot.com";
+        var base_address = HOSTNAME;
 
 		function success(data) {
 
@@ -28,7 +28,7 @@
         {
             var get_transactions_path = '/transactions/' + client_wallet;
 
-            return $http.get(qa_base_address + get_transactions_path).then(success, error);
+            return $http.get(base_address + get_transactions_path).then(success, error);
         }
 
         function convertUSD2BTC(amount)

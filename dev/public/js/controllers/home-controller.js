@@ -1,6 +1,7 @@
 (function(app) {
-	app.controller('HomeController', ['$scope', 'SearchFactory', 'LCP', function($scope, SearchFactory, LCP) {
+	app.controller('HomeController', ['$scope', 'SearchFactory', 'LCP', 'HOSTNAME', function($scope, SearchFactory, LCP, HOSTNAME) {
 
+    console.log(HOSTNAME);
     console.log(LCP);
 		 var vm = this;
 
