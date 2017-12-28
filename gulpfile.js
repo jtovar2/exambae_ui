@@ -172,9 +172,10 @@ gulp.task('js', function() {
 });
 
 gulp.task('bower', ['index', 'index:dist'], function() {
-    var bowerFiles = mainBowerFiles('**/*.js');
-      console.log('bower files: ', bowerFiles);
-    return gulp.src(mainBowerFiles('**/*.js'))
+    var bowerFiles_js = mainBowerFiles('**/*.js');
+    var bower_css = mainBowerFiles('**/*.css'); 
+    console.log(bowerFiles_js.concat(bower_css));  
+    return gulp.src(bowerFiles_js.concat(bower_css) , {base: "bower_components/"})
         .pipe(gulp.dest('./dev/bower_components'))
         .pipe(gulp.dest('./dist/bower_components'));
 });
