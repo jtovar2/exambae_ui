@@ -1,5 +1,5 @@
 (function(app) {
-	app.factory('SearchFactory', ['$q', '$http', function($q, $http) {
+	app.factory('SearchFactory', ['$q', '$http', 'HOSTNAME', function($q, $http, HOSTNAME) {
 
 
 		var services = {
@@ -11,7 +11,7 @@
                 getTags: getTags
             };
 
-        var qa_base_address = "http://demolisherapp.appspot.com";
+        var base_address = HOSTNAME;
 
 
         function success(data) {
@@ -34,13 +34,13 @@
             var get_exams_by_tag_path = "/frontend/tag/" + tag.display + "/get_resources";
 
 
-            return $http.get(qa_base_address + get_exams_by_tag_path).then(success, error);
+            return $http.get(base_address + get_exams_by_tag_path).then(success, error);
         }
 
         function getTags () {
             var get_tags_path = '/frontend/get_tags'
 
-            return $http.get(qa_base_address + get_tags_path).then(success, error);
+            return $http.get(base_address + get_tags_path).then(success, error);
         }
 
         function getSchools()
@@ -57,14 +57,14 @@
 				          display: school
 				        };
     			})*/
-            return $http.get(qa_base_address + get_schools_path).then(success, error);
+            return $http.get(base_address + get_schools_path).then(success, error);
         }
 
         function getClasses(school)
         {
 
             var get_classes_path = '/frontend/school/' + school.display + '/get_classes'
-            return $http.get(qa_base_address + get_classes_path).then(success, error);
+            return $http.get(base_address + get_classes_path).then(success, error);
 
 
         }
@@ -73,7 +73,7 @@
         {
             var get_exams_path =  '/frontend/school/' + school.display + '/school_class/' + classname.display + '/get_resources';
 
-            return $http.get(qa_base_address + get_exams_path).then(success, error);
+            return $http.get(base_address + get_exams_path).then(success, error);
 
         }
 

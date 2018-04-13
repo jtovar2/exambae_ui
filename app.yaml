@@ -1,4 +1,5 @@
 runtime: python27
+module: exambae
 api_version: 1
 threadsafe: true
 

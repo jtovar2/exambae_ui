@@ -1,14 +1,14 @@
 <div ng-controller="checktransactionsController">
 
-	<h2 class="md-display-1">Transaction History</h2>
+	<h2 class="md-display-1">Check Transaction Status</h2>
 	<form name="vm.form">
 		<div layout="column" flex="80">
 		<md-input-container>
-			<label>Your Bitcoin Wallet</label>
+			<label>TransactionID</label>
   			<input required type="text" id="bitcoin" ng-model="vm.clients_bitcoin_address">
 		</md-input-container>
 
-		<md-button class="md-raised md-accent" ng-disabled="vm.form.$invalid" ng-click="vm.submitBitcoinAddress()">Submit Address</md-button>
+		<md-button class="md-raised md-accent" ng-disabled="vm.form.$invalid" ng-click="vm.submitBitcoinAddress()">Check my shit~</md-button>
 		</div>
 	</form>
 

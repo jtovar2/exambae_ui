@@ -1,31 +1,35 @@
 <div ng-controller="viewexamController">
-<md-content layout-padding ng-hide="vm.loading" flex="100">
-	<md-whiteframe class="md-whiteframe-21dp" flex="90" layout="column" layout-align="space-around ">
-	School: {{vm.exam.school}}
-	<br>
-	Class: {{vm.exam.school_class}}
-	<br>
-	Professor: {{vm.exam.professor}}
-	<br>
-	Description: {{vm.exam.description}}
-	<br>
+<md-content  class="md-padding" >
+<div layout-align="center center" flex="nogrow">
+		<md-card>
+		
+			<md-card-title>
 
-	<form name="vm.form">
-	<div ng-hide="vm.exam.free_or_nah" layout="column">
-		{{vm.priceInBTC}} BTC
-		<md-input-container>
-			<label>Your Bitcoin Wallet</label>
-  			<input required type="text" id="bitcoin" ng-model="vm.payment.clients_bitcoin_address">
-		</md-input-container>
+				          <md-card-title-text>
+            <span class="md-headline">{{vm.exam.school}} ::: {{vm.exam.school_class}}</span>
+            <span class="md-subhead">{{vm.exam.professor}}</span>
+            <span ng-hide="vm.exam.free_or_nah" class="md-headline">{{vm.priceInBTC}} DOGECOINS ~ {{vm.exam.price}} USD</span>
+            <span ng-hide="vm.exam.free_or_nah">1. Deposit dogecoin amount into {{vm.address}}</span>
+            <span ng-hide="vm.exam.free_or_nah">2. Provide us with Transaction ID</span>
+            <span ng-hide="vm.exam.free_or_nah">3. ????</span>
+            <span ng-hide="vm.exam.free_or_nah">4. Profit</span>
+    <span ng-show="vm.exam.free_or_nah" >Any dogecoins deposited to: {{vm.address}} will be given to the creator</span>
+          </md-card-title-text>
+          <div flex="nogrow">
+		  	<img ng-src="{{vm.qr_code_url}}"  alt="Description" />
+  </div>
 
-		<md-button class="md-raised md-accent" ng-disabled="vm.form.$invalid" ng-click="vm.payForExam()">Submit Transaction</md-button>
-	</div>
-	</form>
+		
+	</md-card-title>
+	<md-card-content layout="column" >
+
+    <span ng-show="vm.exam.free_or_nah" class="md-headline">Donate and support your fellow students!!!</span>
 	<md-button ng-show="vm.exam.free_or_nah" class="md-raised md-accent"   ng-href="{{vm.downloadLink}}">Download</md-button>
 
-	</md-whiteframe>
-
-
+		  
+	
+</md-card-content>
+</md-card>
+</div>
 </md-content>
-
 </div>

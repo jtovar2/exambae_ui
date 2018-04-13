@@ -1,5 +1,5 @@
 (function(app) {
-	app.controller('newexamController', ['$scope', 'ExamFactory', '$state', function($scope, ExamFactory, $state) {
+	app.controller('newexamController', ['$scope', 'ExamFactory', '$state',  'HOSTNAME',function($scope, ExamFactory, $state, HOSTNAME) {
 		var vm = this;
 		console.log("shubin learning today");
 		vm.tagsReadonlyToggle = false;
@@ -51,7 +51,8 @@
 		function updateUploadUrl(data)
 		{
 			vm.uploadUrlLoading = false;
-			vm.uploadUrl = data;
+			vm.uploadUrl = HOSTNAME + data;
+			console.log(vm.uploadUrl);
 		}
 
 		function deleteFile()

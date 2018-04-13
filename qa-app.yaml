@@ -1,0 +1,30 @@
+runtime: python27
+module: exambae
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /bower_components
+  static_dir: dist/bower_components
+
+- url: /partials
+  static_dir: dist/partials
+
+- url: /public
+  static_dir: dist/public
+
+- url: /.*
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+
+skip_files:
+- node_modules/
+- bower_components/
+- public/
+- spec/
+- scss/
+- .git/

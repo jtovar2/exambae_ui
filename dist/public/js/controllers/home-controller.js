@@ -1,5 +1,8 @@
 (function(app) {
-	app.controller('HomeController', ['$scope', 'SearchFactory', function($scope, SearchFactory) {
+	app.controller('HomeController', ['$scope', 'SearchFactory', 'LCP', 'HOSTNAME', function($scope, SearchFactory, LCP, HOSTNAME) {
+
+    console.log(HOSTNAME);
+    console.log(LCP);
 		 var vm = this;
 
      vm.loadingExams = true;

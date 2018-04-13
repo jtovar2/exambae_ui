@@ -82,13 +82,17 @@ gulp.task('lcp', function() {
     if( LCP.toUpperCase() === "PR")
     {
     return string_src(CONFIG_PATH , config_js)
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest('./dist/public'))
+        .pipe(gulp.dest('./dev/public'))
+        .pipe(gulp.dest('./public'));
     }
 
     else
     {
     return string_src(CONFIG_PATH, config_js)
-            .pipe(gulp.dest('./public'));
+        .pipe(gulp.dest('./dist/public'))
+        .pipe(gulp.dest('./dev/public'))
+        .pipe(gulp.dest('./public'));
     }
 
 });
@@ -134,7 +138,10 @@ gulp.task('index', function() {
     var sources_list = bower_js.concat(bower_css);
     sources_list = sources_list.concat(file_sources);
 
-    var sources = gulp.src(sources_list, {read: false}); 
+    var sources = gulp.src(sources_list, {read: false});
+
+    console.log("ALLLLLL SOURCESSSS*****************************");
+    console.log(sources_list); 
 
     return target.pipe(inject(sources))
         .pipe(gulp.dest('./dev'))
@@ -171,12 +178,22 @@ gulp.task('js', function() {
         .pipe(gulp.dest('./dev/public/js'))
 });
 
+gulp.task('dist:js', function() {
+    return gulp.src('./public/js/**/*.js')
+        .pipe(gulp.dest('./dist/public/js'))
+});
+
+
 gulp.task('bower', ['index', 'index:dist'], function() {
-    var bowerFiles = mainBowerFiles('**/*.js');
-      console.log('bower files: ', bowerFiles);
-    return gulp.src(mainBowerFiles('**/*.js'))
-        .pipe(gulp.dest('./dev/bower_components'))
-        .pipe(gulp.dest('./dist/bower_components'));
+    var bower_css = mainBowerFiles('**/*.css'); 
+    var bower_js = mainBowerFiles('**/*.js');
+
+    var sources_list = bower_js.concat(bower_css);
+    return gulp.src(sources_list, {base: 'bower_components/'})
+                                   
+                                   /*.pipe(gulp.dest('./issa_test'));*/
+        .pipe(gulp.dest('./dev/bower_components/'))
+        .pipe(gulp.dest('./dist/bower_components/'));
 });
 
 gulp.task('image-watch', ['image', 'image-min'], function(done) {
@@ -217,7 +234,19 @@ gulp.task('uglify-js', function() {
 
 gulp.task('index:dist', function() {
     var target = gulp.src('./dist/index.html');
-    var sources = gulp.src(['./bower_components/**/*.js', './public/js/min/anonymous.min.js', './bower_components/**/*.css', './public/css/**/*.css'], { read: false });
+
+
+    var file_sources = [ './public/js/config/app.js', './public/js/config/config.js', './public/js/factories/**/*.js',
+    './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
+    
+    var bower_css = mainBowerFiles('**/*.css'); 
+    var bower_js = mainBowerFiles('**/*.js');
+
+    var sources_list = bower_js.concat(bower_css);
+    sources_list = sources_list.concat(file_sources);
+
+    var sources = gulp.src(sources_list, {read: false}); 
+
 
     return target.pipe(inject(sources))
         .pipe(gulp.dest('./dist'))
@@ -258,7 +287,7 @@ gulp.task('serve:dist', ['dist:package'], function() {
     gulp.watch('./bower_components/**/*.js', ['bower']);
 });
 
-gulp.task('dist:package', ['lcp','sass', 'bower', 'uglify-js', 'image', 'image-min', 'html', 'dist:iife', 'index:dist']);
+gulp.task('dist:package', ['lcp','sass', 'bower','dist:js', 'uglify-js', 'image', 'image-min', 'html', 'dist:iife', 'index:dist']);
 
 
 //TDD
