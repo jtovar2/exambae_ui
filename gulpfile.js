@@ -185,15 +185,12 @@ gulp.task('dist:js', function() {
 
 
 gulp.task('bower', ['index', 'index:dist'], function() {
+    var bowerFiles_js = mainBowerFiles('**/*.js');
     var bower_css = mainBowerFiles('**/*.css'); 
-    var bower_js = mainBowerFiles('**/*.js');
-
-    var sources_list = bower_js.concat(bower_css);
-    return gulp.src(sources_list, {base: 'bower_components/'})
-                                   
-                                   /*.pipe(gulp.dest('./issa_test'));*/
-        .pipe(gulp.dest('./dev/bower_components/'))
-        .pipe(gulp.dest('./dist/bower_components/'));
+    console.log(bowerFiles_js.concat(bower_css));  
+    return gulp.src(bowerFiles_js.concat(bower_css) , {base: "bower_components/"})
+        .pipe(gulp.dest('./dev/bower_components'))
+        .pipe(gulp.dest('./dist/bower_components'));
 });
 
 gulp.task('image-watch', ['image', 'image-min'], function(done) {
