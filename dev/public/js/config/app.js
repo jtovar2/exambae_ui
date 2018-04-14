@@ -33,6 +33,12 @@ var exambae = angular.module('exambae', ['ngMaterial', 'ngAnimate', 'ngMessages'
         controllerAs: 'vm'
 	})
 
+	.state('cashout', {
+		url: '/cashout',
+		templateUrl: 'partials/cashout-partial.html',
+		controller: 'cashoutController',
+        controllerAs: 'vm'
+	})
 	.state('home', {
             url: '/',
             templateUrl: 'partials/home-partial.html',

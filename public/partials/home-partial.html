@@ -1,7 +1,10 @@
-<md-whiteframe class="md-whiteframe-21dp" layout="column" ng-hide="vm.loadingSchools" >
-<h2 class="md-display-1">Search by School</h2>
+<md-whiteframe class="md-whiteframe-21dp" layout="column" layout-align="space-between stretch" ng-hide="vm.loadingSchools" flex=80 >
+		<div flex layout="row" layout-align="center start">
+ 			<span><h2 class="md-display-1" >Search by School</h2></span>
+ 		</div>
 </br>
- 	<div layout="row" layout-align="space-around center" >
+ 	<div layout="row" layout-align="space-around center" flex=100 >
+
 		<div flex="90" >
 			<md-autocomplete
 		          ng-disabled="vm.isSchoolSearchDisabled"
@@ -54,8 +57,10 @@
 		</div>
 	</div>
 </br>
+<div flex layout="row" layout-align="center start">
+ 			<span><h2 class="md-display-1">Search by tag</h2></span>
+ 		</div>
 
-<h2 class="md-display-1">Search by tag</h2>
 
 <div layout="row" layout-align="space-around center" >
 		<div flex="90" >
