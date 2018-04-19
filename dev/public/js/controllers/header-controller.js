@@ -1,5 +1,5 @@
 (function(app) {
-	app.controller('HeaderController', ['$scope', '$state', '$rootScope', "$mdDialog", function($scope, $state, $rootScope, $mdDialog) {
+	app.controller('HeaderController', ['$scope', '$state', '$rootScope', function($scope, $state, $rootScope ) {
 
 		var vm = this;
 		

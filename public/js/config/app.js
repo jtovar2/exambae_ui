@@ -1,4 +1,4 @@
-var exambae = angular.module('exambae', ['ngMaterial', 'ngAnimate', 'ngMessages', 'ngAria', 'ui.router']);
+var exambae = angular.module('exambae', ['ngAnimate', 'ngAria', 'ui.router']);
 
 (function(app) {
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
