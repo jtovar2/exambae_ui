@@ -1,96 +1,58 @@
-<md-whiteframe class="md-whiteframe-21dp" layout="column" layout-align="space-between stretch" ng-hide="vm.loadingSchools" flex=80 >
-		<div flex layout="row" layout-align="center start">
- 			<span><h2 class="md-display-1" >Search by School</h2></span>
- 		</div>
-</br>
- 	<div layout="row" layout-align="space-around center" flex=100 >
+<div class="container">
 
-		<div flex="90" >
-			<md-autocomplete
-		          ng-disabled="vm.isSchoolSearchDisabled"
-		          md-no-cache="vm.isSchoolCacheDisabled"
-		          md-selected-item="vm.selectedSchool"
-		          md-search-text-change="vm.searchSchoolChange(vm.searchSchool)"
-		          md-search-text="vm.searchSchool"
-		          md-selected-item-change="vm.selectedSchoolChange(item)"
-		          md-items="item in vm.schoolQuerySearch(vm.searchSchool)"
-		          md-item-text="item.display"
-		          md-min-length="0"
-		          placeholder="Enter your school's name">
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
 
-		        	<md-item-template>
-		          	<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
-		        	</md-item-template>
-				  	<md-not-found>
-		          	No states matching "{{vm.searchSchool}}" were found.
-		          	<a ng-click="vm.newState(vm.searchSchool)">Create a new one!</a>
-		        	</md-not-found>
-		     </md-autocomplete>
+  <div class="jumbotron text-center">
 
-		</div>
+    <h2><span class="label label-info">ExamBae<span class="glyphicon glyphicon-heart"></span></span></h2>
+    <br>
+    <pre>Discover thousands of <span class="label label-info">FREE</span> and paid educational resources. Created by your fellow students. Best of all everything is anonymous</pre>
+    <br>
+    <div ng-hide="vm.loadingSchools">
+    <h4>Search by School and Class</h4>
+    <label>School Name:</label>
+    <input type="text"  ng-model="vm.searchSchool" uib-typeahead="state.display for state in vm.schools | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedSchoolChange($item)" class="form-control">
+    <!-- <i ng-show="vm.loadingSchools" class="glyphicon glyphicon-refresh"></i>
+    <div ng-show="vm.schoolQueryNoResults">
+      <i class="glyphicon glyphicon-remove"></i> No Results Found
+    </div> -->
+      <div ng-hide="vm.loadingClasses">
+    <label>Class:</label>
+      <input type="text"  ng-model="vm.searchClass" uib-typeahead="state.display for state in vm.schoolClasses | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedClassChange($item)" class="form-control">
+      </div>
+    </div>
+    <br>
+    <h4>Search by Tag</h4>
+    <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+    <div ng-show="noResults">
+      <i class="glyphicon glyphicon-remove"></i> No Results Found
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="exam in vm.exams">
+      <div class="thumbnail" ui-sref="viewexam({examId: exam.id})">
+        <div class="caption">
+          <h3>{{ exam.school_class }} ::: ${{exam.professor}}</h4>
+          <h4>{{ exam.school }}</h4>
+          <p>{{ exam.description }}</p>
+
+          <div class="alert alert-warning" role="alert">
+{{exam.number_of_downloads}} number of downloads
+        </div>
+
+          <h3 ng-show="exam.free_or_nah"><span class="label label-info">FREE</span></h3>
+          <h3 ng-hide="exam.free_or_nah"><span class="label label-success">{{exam.price}} USD</span></h3>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+
 </div>
-</br>
-
-	<div layout="row" layout-align="space-around center" ng-hide="vm.loadingClasses">
-		<div flex="90" >
-
-			<md-autocomplete 
-			          ng-disabled="vm.isClassSearchDisabled"
-			          md-no-cache="vm.isClassCacheDisabled"
-			          md-selected-item="vm.selectedClass"
-			          md-search-text-change="vm.searchClassChange(vm.searchClass)"
-			          md-search-text="vm.searchClass"
-			          md-selected-item-change="vm.selectedClassChange(item)"
-			          md-items="item in vm.classQuerySearch(vm.searchClass)"
-			          md-item-text="item.display"
-			          md-min-length="0"
-			          placeholder="Enter the course name">
-
-			        <md-item-template>
-			          <span md-highlight-text="vm.searchClass" md-highlight-flags="^i">{{item.display}}</span>
-			        </md-item-template>
-					  <md-not-found>
-			          No states matching "{{vm.searchClass}}" were found.
-			          <a ng-click="vm.newState(vm.searchClass)">Create a new one!</a>
-			        </md-not-found>
-			</md-autocomplete>
-		</div>
-	</div>
-</br>
-<div flex layout="row" layout-align="center start">
- 			<span><h2 class="md-display-1">Search by tag</h2></span>
- 		</div>
-
-
-<div layout="row" layout-align="space-around center" >
-		<div flex="90" >
-			<md-autocomplete
-		          ng-disabled="vm.isTagSearchDisabled"
-		          md-no-cache="vm.isTagCacheDisabled"
-		          md-selected-item="vm.selectedTag"
-		          md-search-text-change="vm.searchTagChange(vm.searchTag)"
-		          md-search-text="vm.searchTag"
-		          md-selected-item-change="vm.selectedTagChange(item)"
-		          md-items="item in vm.tagQuerySearch(vm.searchTag)"
-		          md-item-text="item.display"
-		          md-min-length="0"
-		          placeholder="Enter your tag">
-
-		        	<md-item-template>
-		          	<span md-highlight-text="vm.searchText" md-highlight-flags="^i">{{item.display}}</span>
-		        	</md-item-template>
-				  	<md-not-found>
-		          	No states matching "{{vm.searchTag}}" were found.
-		          	<a ng-click="vm.newState(vm.searchTag)">Create a new one!</a>
-		        	</md-not-found>
-		     </md-autocomplete>
-
-		</div>
-	</div>
-<br>
-<div ng-hide="vm.loadingExams" ng-repeat="exam in vm.exams">
-  <exam-directive exam="exam"></exam-directive>
-</div>
-
-</md-whiteframe>
 

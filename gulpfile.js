@@ -12,6 +12,8 @@ var iife = require("gulp-iife");
 var cleanCSS = require('gulp-clean-css');
 var Server = require('karma').Server;
 
+var gulpFilter = require('gulp-filter');
+
 var mainBowerFiles = require('main-bower-files');
 
 var env_vars = require('./env_vars.json');
@@ -132,9 +134,29 @@ gulp.task('index', function() {
     var file_sources = [ './public/js/config/app.js', './public/js/config/config.js', './public/js/factories/**/*.js',
     './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
     
-    var bower_css = mainBowerFiles('**/*.css'); 
+
+    var source_css = gulpFilter('**/*.css');
+    console.log(source_css);
+
+    var bower_css = mainBowerFiles('**/*css', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
     var bower_js = mainBowerFiles('**/*.js');
 
+    console.log(bower_css)
     var sources_list = bower_js.concat(bower_css);
     sources_list = sources_list.concat(file_sources);
 
@@ -186,7 +208,22 @@ gulp.task('dist:js', function() {
 
 gulp.task('bower', ['index', 'index:dist'], function() {
     var bowerFiles_js = mainBowerFiles('**/*.js');
-    var bower_css = mainBowerFiles('**/*.css'); 
+    var bower_css = mainBowerFiles('**/*.css', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+    ); 
     console.log(bowerFiles_js.concat(bower_css));  
     return gulp.src(bowerFiles_js.concat(bower_css) , {base: "bower_components/"})
         .pipe(gulp.dest('./dev/bower_components'))
