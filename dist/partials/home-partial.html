@@ -13,26 +13,22 @@
     <div ng-hide="vm.loadingSchools">
     <h4>Search by School and Class</h4>
     <label>School Name:</label>
-    <input type="text"  ng-model="vm.searchSchool" uib-typeahead="state.display for state in vm.schools | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedSchoolChange($item)" class="form-control">
+    <input type="text"  ng-model="vm.searchSchool" ng-change='vm.searchSchoolChange(vm.searchSchool)' uib-typeahead="state.display for state in vm.schools | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedSchoolChange($item)" class="form-control">
     <!-- <i ng-show="vm.loadingSchools" class="glyphicon glyphicon-refresh"></i>
     <div ng-show="vm.schoolQueryNoResults">
       <i class="glyphicon glyphicon-remove"></i> No Results Found
     </div> -->
-      <div ng-hide="vm.loadingClasses">
+      <div ng-hide="vm.loadingClasses && vm.schoolHasBeenSelected">
     <label>Class:</label>
       <input type="text"  ng-model="vm.searchClass" uib-typeahead="state.display for state in vm.schoolClasses | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedClassChange($item)" class="form-control">
       </div>
     </div>
     <br>
     <h4>Search by Tag</h4>
-    <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" uib-typeahead="address for address in getLocation($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">
-    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-    <div ng-show="noResults">
-      <i class="glyphicon glyphicon-remove"></i> No Results Found
-    </div>
+    <input type="text"  ng-model="vm.searchTag"  uib-typeahead="state.display for state in vm.tags | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedTagChange($item)" class="form-control">
   </div>
 
-  <div class="row">
+  <div class="row" ng-hide='vm.loadingExams'>
     <div class="col-sm-6 col-md-4" ng-repeat="exam in vm.exams">
       <div class="thumbnail" ui-sref="viewexam({examId: exam.id})">
         <div class="caption">

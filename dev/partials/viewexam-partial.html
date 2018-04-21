@@ -1,35 +1,76 @@
-<div ng-controller="viewexamController">
-<md-content  class="md-padding" >
-<div layout-align="center center" flex="nogrow">
-		<md-card>
-		
-			<md-card-title>
+<div class="container">
 
-				          <md-card-title-text>
-            <span class="md-headline">{{vm.exam.school}} ::: {{vm.exam.school_class}}</span>
-            <span class="md-subhead">{{vm.exam.professor}}</span>
-            <span ng-hide="vm.exam.free_or_nah" class="md-headline">{{vm.priceInBTC}} DOGECOINS ~ {{vm.exam.price}} USD</span>
-            <span ng-hide="vm.exam.free_or_nah">1. Deposit dogecoin amount into {{vm.address}}</span>
-            <span ng-hide="vm.exam.free_or_nah">2. Provide us with Transaction ID</span>
-            <span ng-hide="vm.exam.free_or_nah">3. ????</span>
-            <span ng-hide="vm.exam.free_or_nah">4. Profit</span>
-    <span ng-show="vm.exam.free_or_nah" >Any dogecoins deposited to: {{vm.address}} will be given to the creator</span>
-          </md-card-title-text>
-          <div flex="nogrow">
-		  	<img ng-src="{{vm.qr_code_url}}"  alt="Description" />
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
   </div>
 
-		
-	</md-card-title>
-	<md-card-content layout="column" >
 
-    <span ng-show="vm.exam.free_or_nah" class="md-headline">Donate and support your fellow students!!!</span>
-	<md-button ng-show="vm.exam.free_or_nah" class="md-raised md-accent"   ng-href="{{vm.downloadLink}}">Download</md-button>
 
-		  
-	
-</md-card-content>
-</md-card>
+
+
+
+<div class="jumbotron">
+
+  <h1 class="text-center">{{vm.exam.school_class}}</h1>
+  <p class="text-center">{{vm.exam.professor}}</p>
+  <label>Description:  </label>
+  <div class="well"><span>{{vm.exam.description}}
+    
+    </span>
+  </div>
 </div>
-</md-content>
+
+
+
+
+<div class="row">
+  <div class="col-lg-6 col-sm-12">
+
+
+<div class="panel panel-info" ng-hide="vm.free_or_nah">
+  <div class="panel-heading">how to pay</div>
+    <div class="panel-body">
+
+
+<div class="alert alert-success" role="alert">
+  <h4 class="text-center"><span class="glyphicon glyphicon-education" airia-hidden="true"></span>
+  {{vm.priceInBTC}} Dogecoins ~ <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>{{vm.exam.price}} USD</h4>
+
+</div>
+
+
+
+<ul class="list-group">
+  <li class="list-group-item">1. Deposit dogecoin amount into {{vm.address}}
+</li>
+<li class="list-group-item list-group-item-info"> <span class="text-center"></span>
+  <h6 class="text-center"><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span> {{vm.address}}</h6>
+</li>
+  <li class="list-group-item">2. Go to 'Validate Payment'</li>
+  <li class="list-group-item">3. Provide us with Transaction ID</li>
+  <li class="list-group-item">4.????</li>
+  <li class="list-group-item">5. Profit</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+  </div>
+  <div class="col-lg-4 col-sm-12">
+<div class="panel panel-success">
+  <div class="panel-heading">DAT QR CODE</div>
+    <div class="panel-body">
+ 
+<img ng-src="{{vm.qr_code_url}}"  alt="QR HOE" />
+
+</div>
+
+</div>
+</div>
+</div>
+
+
 </div>

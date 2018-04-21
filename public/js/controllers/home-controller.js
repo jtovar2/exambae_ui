@@ -9,7 +9,7 @@
      vm.exams = [{"school": "Georgia State University", "number_of_downloads": 0, "description": "a;sldfkja;sldkfja;lsdkfja;sldfja;lsjdf;alsdjfalsdfj", "tags": ["tag", "tagg2"], "price": 1, "school_class": "class2040", "id": "E031582AA222A086", "professor": "Ayyyee", "bitcoin_address": "DHrE8NTL7dNxm1dgFH9Pg4cxhhsRsPkgan", "file": "D1CF5576FD79B53E", "free_or_nah": false},
      {"school": "Georgia State University", "number_of_downloads": 0, "description": "a;sldfkja;sldkfja;lsdkfja;sldfja;lsjdf;alsdjfalsdfj", "tags": ["tag", "tagg2"], "price": 1, "school_class": "class2040", "id": "E031582AA222A086", "professor": "Ayyyee", "bitcoin_address": "DHrE8NTL7dNxm1dgFH9Pg4cxhhsRsPkgan", "file": "D1CF5576FD79B53E", "free_or_nah": true}];
 
-
+     vm.not_true = false;
      vm.WTF= "WTFF";
 	vm.loadingSchools = true;
   vm.schoolQueryNoResults = true;
@@ -35,6 +35,7 @@
     vm.schools = data;
   }
     function searchSchoolChange(text) {
+
 
       vm.loadingClasses = true;
       vm.loadingExams = true;
@@ -171,7 +172,7 @@
     }
 
     function selectedTagChange(item) {
-
+      vm.selectedTag = item;
 
       console.log(item);
       if(item != null)

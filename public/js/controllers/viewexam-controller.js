@@ -1,5 +1,5 @@
 (function(app) {
-	app.controller('viewexamController', ['$scope', '$stateParams', 'ExamFactory', 'bitcoinApiFactory', '$mdDialog', function($scope, $stateParams, ExamFactory, bitcoinApiFactory, $mdDialog) {
+	app.controller('viewexamController', ['$scope', '$stateParams', 'ExamFactory', 'bitcoinApiFactory', function($scope, $stateParams, ExamFactory, bitcoinApiFactory) {
 
 		console.log($stateParams);
 
@@ -9,7 +9,6 @@
 		vm.form = {};
 
 
-		vm.payForExam = payForExam;
 		
 		vm.exam = {};
 
@@ -69,31 +68,7 @@
 			vm.priceInBTC = parseFloat(vm.exam.price) /  vm.dogeExchangeRate;
 			}
 		}
-		function payForExam()
-		{
-			ExamFactory.payForExam(vm.payment).then(paymentReceived())
-		}
 
-		function paymentReceived()
-		{
-			console.log("payment recieved")
-		}
-
-    vm.showAdvanced = function(ev) {
-    $mdDialog.show({
-      controller: DialogController,
-      templateUrl: 'dialog1.tmpl.html',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.status = 'You cancelled the dialog.';
-    });
-  };
         
 
 
