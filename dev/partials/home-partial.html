@@ -18,7 +18,7 @@
     <div ng-show="vm.schoolQueryNoResults">
       <i class="glyphicon glyphicon-remove"></i> No Results Found
     </div> -->
-      <div ng-hide="vm.loadingClasses && vm.schoolHasBeenSelected">
+      <div ng-show="vm.schoolHasBeenSelected">
     <label>Class:</label>
       <input type="text"  ng-model="vm.searchClass" uib-typeahead="state.display for state in vm.schoolClasses | filter:$viewValue | limitTo:8" typeahead-on-select="vm.selectedClassChange($item)" class="form-control">
       </div>

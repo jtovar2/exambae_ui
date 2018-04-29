@@ -1,106 +1,139 @@
-  
-<div ng-controller="newexamController" layout="row" layout-fill>
-
-<md-content layout="column" flex="100">
-
-      <form name="vm.metaDataForm">
-
-        <div layout-gt-sm="row" flex="100">
-        <md-input-container class="md-block" flex="100">
-          <label>School</label>
-          <input required ng-minlength="5" name="school" ng-model="vm.exam.school">
-          <div ng-messages="vm.metaDataForm.school.$error">
-              
-              <div ng-message="required">A school is required.</div>
-              <div ng-message="minlength">School name must be longer than 5 characters.</div>
-          </div>
-
-        </md-input-container>
-      </div>
+<div class="container">
+<form name="vm.metaDataForm">
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
 
 
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <labeL>Professor</label>
-              <input required name="professor" ng-minlength="2" ng-model="vm.exam.professor">
-              <div ng-messages="vm.metaDataForm.professor.$error">
-                <div ng-message="minlength">A professor name must be longer than 2 characters.</div>
-                <div ng-message="required">A proffesor name is required</div>
-               </div> 
-          </md-input-container>
 
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Class</label>
-            <input required name="school_class" ng-model="vm.exam.school_class">
-            <div ng-messages="vm.metaDataForm.school_class.$error">
-              
-              <div ng-message="required">A school class is required.</div>
-            </div>
-          </md-input-container>
-        </div>
-        
-        
+  <div class="panel panel-info">
+   <div class="panel-heading">Tell us more about your school resource</div>
+   <div class="panel-body">
 
-        <div layout-gt-sm="row" flex="100">
-        <md-input-container class="md-block" flex="100">
-          <label>Description</label>
-          <textarea required ng-minlength="15" name="description" ng-model="vm.exam.description"  md-maxlength="150" rows="5" md-select-on-focus></textarea>
-          <div ng-messages="vm.metaDataForm.description.$error">
-              <div ng-message="minlength">The description must be longer than 15 characters.</div>
-              <div ng-message="required">A description is required.</div>
-          </div>
-        </md-input-container>
-      </div>
+<div class="well"><span>Hey, glad you're down for business. In order for us to find you customers, we will need to konw more about your educational resource.</div>
+<div class="row">
+  <div class="col-lg-8">
+<label>School</label>
 
 
-      <div layout-gt-sm="row" flex="100">
-        <md-chips  flex="100" ng-model="vm.exam.tags" name="tags" readonly="vm.tagsReadonlyToggle"
-                md-removable="vm.tagsRemovable" md-max-chips="5" placeholder="Enter a tags...">
-        <md-chip-template>
-          <strong>{{$chip}}</strong>
-        </md-chip-template>
-      </md-chips>
+  <input type="text" class="form-control" placeholder="Fuck roll tide" required ng-minlength="5" name="school" ng-model="vm.exam.school">
 
-      </md-content>
-      </div>
+</div>
+</div>
 
-      <br>
-      <br>
+    <br>
+<div class="row">
+  <div class="col-lg-8">
+<label>Professor</label>
 
-      <div layout="row">
-    <div layout="column" flex="50">
 
-          <md-input-container class="md-block" flex="100">
-            <label>Resource Price in USD<md-icon ng-bind="'attach_money'"></md-icon></label>
-            <div layout="row" flex="100">
-        <input ng-model="vm.exam.price" name="price" type="number" min="0.00" step="0.01" max="2500" >
-        </div>
-        </md-input-container>
-        <p ng-show="vm.exam.price === 0.0">ITS FREE!!!<md-icon ng-bind="'accessibility'"></md-icon></p>
-      </div>
-      </form>
+  <input type="text" class="form-control" placeholder="Shout out Dr.Chi" required ng-minlength="5" name="professor" ng-model="vm.exam.professor">
 
-      
-        <div layout="column" flex="50" layout-align="center center" ng-hide="vm.uploadUrlLoading">
-        <md-content flex="100" ng-hide="vm.fileUploaded">
-          <input type="file" file-input="file" id="file"/>
-      <md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.uploadFile()">Upload</md-button>
-      </md-content>
-      <md-content flex="100" ng-show="vm.fileUploaded">
+</div>
+</div>
+<br>
+<div class="row">
+  <div class="col-lg-8">
+<label>Class Name</label>
 
-      <md-button  id="uploadButton" class="md-raised md-accent" ng-click="vm.deleteFile()">Cancel Upload<md-icon ng-bind="'delete'"></md-icon></md-button>
-      </md-content>
-      </div>
+
+  <input type="text" class="form-control" placeholder="CSC2011" required ng-minlength="5" name="school_class" ng-model="vm.exam.school_class">
+
+</div>
+</div>
+
+
+     
+   
     </div>
-    <div layout="row">
+  </div>
+
+
+    <div class="panel panel-info">
+   <div class="panel-heading">Tell us more about your school resource</div>
+   <div class="panel-body">
+
+<div class="well"><span>Why should users buy your product?? Be descriptive and creative to seal the deal (Remember they are buying a file) ;)</span></div>
+
+<div class="form-group">
+  <label for="description">Description:</label>
+  <textarea class="form-control" rows="5" id="description"
+  ng-model="vm.exam.description"></textarea>
+</div>
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-info">
+   <div class="panel-heading">Tell us more about your school resource</div>
+   <div class="panel-body">
+
+<div class="well"><span> so here you will upload your photos, pdfs, powerpoints, and knowledge</span></div>
+
+<div class="alert alert-success" role="alert" ng-show="vm.fileUploaded">
+  <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+  FILENAME
+
+</div>
+
+
+<div class="col-xs-2 center-block" style="float:none"> 
+
+<div class="btn-group">
+  <input type="file" file-input="file" id="file" ng-hide="vm.fileUploaded" />
+  <br>
+        <label class="btn btn-info" ng-model="checkModel.left" ng-hide="vm.fileUploaded" ng-click="vm.uploadFile()" >Upload</label>
     </div>
 
+    <div class="btn-group" ng-show="vm.fileUploaded">
+        <label class="btn btn-danger" ng-model="checkModel.right" ng-click="vm.deleteFile()" uib-btn-checkbox>Wrong file, Cancel</label>
+    </div>
+  </div>
+   
+   </div>
+</div>
+
+  <div class="panel panel-info">
+   <div class="panel-heading">Tell us how much you believe your information is worth</div>
+   <div class="panel-body">
+ <div class="well">
+  <span> here is where you will price your information</span>
+
+<pre><code>{ "School" : {{vm.exam.school}},</code>
+
+<code>"Class": {{vm.exam.school_class}},</code>
+<code>
+"Professor": {{vm.exam.professor}},</code>
+<code>
+"Description": {{vm.exam.description}},</code>
+<code>
+"Price": {{vm.exam.price}}
+}</code></pre>
 
 
-<md-button class="md-raised md-accent" ng-disabled="vm.metaDataForm.$invalid || vm.exam.file == '' "  ng-click="vm.postExam()">Submit</md-button>
+</div>
+
+<div class="input-group">
+  <span class="input-group-addon">$</span>
+  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+  <span class="input-group-addon">.00</span>
+</div>
+<br>
+
+<div class="i-am-centered">
+  <div class="row">
+        
+        <label class="btn btn-info" ng-model="checkModel.right" uib-btn-checkbox>Release it for Free!</label>
+      <label class="btn btn-success" ng-model="checkModel.right" uib-btn-checkbox>Nah, let's get paid</label>
+</div>
+</div>
+    </div>
 
 
 
 
 
+</div>
+</form>
 </div>

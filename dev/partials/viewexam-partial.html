@@ -26,8 +26,35 @@
 <div class="row">
   <div class="col-lg-6 col-sm-12">
 
+<div class="panel panel-info" ng-show="vm.exam.free_or_nah">
+  <div class="panel-heading">DOWNLOAD</div>
+    <div class="panel-body">
+ 
+<div class="alert alert-info" role="alert">
+  <h4 class="text-center">AYYYEE DIS SHIT FREE FWM!!!</h4>
+  <h4 class="text-center">Support your fellow students :D</h4>
+</div>
+<ul class="list-group">
+  <li class="list-group-item">The resource creator will receive all donations to deposited to the following dogecoin addresss
+</li>
+<li class="list-group-item list-group-item-warning"> <span class="text-center"></span>
+  <h6 class="text-center"><span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span> {{vm.address}}</h6>
+</li>
 
-<div class="panel panel-info" ng-hide="vm.free_or_nah">
+</ul>
+  <div class="row">
+    <div class="col-md-2 col-md-offset-5">
+      <button type="button" class="btn btn-info" ><a ng-href="{{vm.downloadLink}}">DOWNLOAD</a></button>
+    </div>
+  </div>
+</div>
+
+
+
+
+</div>
+
+<div class="panel panel-info" ng-hide="vm.exam.free_or_nah">
   <div class="panel-heading">how to pay</div>
     <div class="panel-body">
 
@@ -69,6 +96,11 @@
 </div>
 
 </div>
+
+
+</div>
+
+
 </div>
 </div>
 

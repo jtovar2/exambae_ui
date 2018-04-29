@@ -38,6 +38,7 @@
 			vm.loading = false;
 
 			vm.downloadLink = ExamFactory.getBlobDownloadUrl(vm.exam.file);
+			console.log(vm.downloadLink);
 
 		bitcoinApiFactory.getDogecoinExchangeRate().then(updateExchangeRate);
 		bitcoinApiFactory.getAddress(vm.exam.id).then(loadWalletImage);

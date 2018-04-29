@@ -1,20 +1,60 @@
-<div ng-controller="checktransactionsController">
+<div class="container">
 
-	<h2 class="md-display-1">Check Transaction Status</h2>
-	<form name="vm.form">
-		<div layout="column" flex="80">
-		<md-input-container>
-			<label>TransactionID</label>
-  			<input required type="text" id="bitcoin" ng-model="vm.clients_bitcoin_address">
-		</md-input-container>
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+<div class="jumbotron">
+<h1 class="text-center">
+  check transaction process
+</h1>
 
-		<md-button class="md-raised md-accent" ng-disabled="vm.form.$invalid" ng-click="vm.submitBitcoinAddress()">Check my shit~</md-button>
-		</div>
-	</form>
 
-	<div ng-repeat="transaction in vm.transactions">
-  <transaction-directive transaction="transaction"></transaction-directive>
+<!--
+This how you center a row in bootstrap col-md-9 must be always odd and col-md-offset-1 is always 
+ <div class="row">
+    <div class="col-md-8 col-md-offset-3">
+      
+<div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="button">CHECK MY SHIT ~</button>
+      </span>
+    </div>
+
+
+    </div>
+</div> -->
+
+
+<div class="input-group">
+      <input type="text" class="form-control" ng-model="vm.clients_bitcoin_address" placeholder="Transaction ID">
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="button" ng-click="vm.submitBitcoinAddress()">CHECK MY SHIT ~</button>
+      </span>
+    </div>
+
+
+
+
+
+
+
 </div>
+
+
+<div ng-repeat="transaction in vm.transactions">
+  
+  <transaction-directive transaction="transaction"></transaction-directive>
+
+</div>
+
+
+
+
+
+
+
+
 
 
 </div>

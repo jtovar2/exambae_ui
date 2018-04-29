@@ -30,7 +30,9 @@
 
 		function updateTransactions(data)
 		{
+			
 			console.log(data);
+
 			vm.transactions = data;
 		}
 
