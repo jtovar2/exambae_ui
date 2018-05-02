@@ -57,7 +57,7 @@
 
 <div class="form-group">
   <label for="description">Description:</label>
-  <textarea class="form-control" rows="5" id="description"
+  <textarea class="form-control" rows="5" name="description" ng-minlength="5"
   ng-model="vm.exam.description"></textarea>
 </div>
     </div>
@@ -116,17 +116,68 @@
 
 <div class="input-group">
   <span class="input-group-addon">$</span>
-  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-  <span class="input-group-addon">.00</span>
+  <input type="number" required step="0.01"  name="price" class="form-control" ng-model="vm.exam.price" aria-label="Amount (to the nearest dollar)">
+  <span class="input-group-addon">USD</span>
 </div>
 <br>
 
 <div class="i-am-centered">
   <div class="row">
+    <div class="col-xs-4 center-block" style="float:none">
+    <div class="btn-group">
         
-        <label class="btn btn-info" ng-model="checkModel.right" uib-btn-checkbox>Release it for Free!</label>
-      <label class="btn btn-success" ng-model="checkModel.right" uib-btn-checkbox>Nah, let's get paid</label>
+        <label class="btn btn-info" ng-model="vm.submitButton1" ng-disabled="vm.exam.description === '' || vm.exam.price === vm.undefined  || vm.exam.price != 0.0  || vm.metaDataForm.$invalid || vm.exam.file == '' "  ng-click="vm.postExam()" uib-btn-checkbox>Release it for Free!</label>
+      <label class="btn btn-success" ng-model="vm.submitButton2" ng-disabled="vm.exam.description === '' || vm.exam.price === vm.undefined  || vm.exam.price === 0.0 || vm.metaDataForm.$invalid || vm.exam.file == '' " ng-click="vm.postExam()" uib-btn-checkbox>Nah, let's get paid</label>
+ <label class="btn btn-success" ng-model="vm.submitButton2"  ng-click="vm.printScope()" uib-btn-checkbox>Nah, let's get paid</label>
+  </div>
+  </div>
 </div>
+
+
+
+</div>
+<br>
+<div ng-show="vm.showFormErrors">
+
+<div ng-hide="vm.metaDataForm.description.$valid && vm.exam.description != ''">
+    <div class="alert alert-danger" role="alert">
+      The description is invalid. Min length of 5 characters
+    </div>
+  </div>
+
+  <div ng-show="vm.exam.file == ''">
+    <div class="alert alert-warning" role="alert">
+      You must upload a file
+    </div>
+  </div>
+
+  <div ng-hide="vm.metaDataForm.price.$valid">
+    <div class="alert alert-danger" role="alert">
+      The price is invalid
+    </div>
+  </div>
+  <div ng-hide="vm.metaDataForm.school.$valid">
+    <div class="alert alert-info" role="alert">
+      The school is invalid. Min length of 5 characters
+    </div>
+  </div>
+<div ng-hide="vm.metaDataForm.school_class.$valid">
+    <div class="alert alert-danger" role="alert">
+      The class is invalid. Min length of 5 characters
+    </div>
+  </div>
+
+  <div ng-hide="vm.metaDataForm.professor.$valid">
+    <div class="alert alert-warning" role="alert">
+      The professor is invalid. Min length of 5 characters
+    </div>
+  </div>
+
+
+</div>
+
+
+
 </div>
     </div>
 
