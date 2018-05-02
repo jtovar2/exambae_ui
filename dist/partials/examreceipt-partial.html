@@ -1,21 +1,64 @@
-<div ng-controller="examreceiptController">
-	<md-content layout-padding ng-hide="vm.loading">
-	<md-whiteframe class="md-whiteframe-21dp" flex="90" layout="column" layout-align="space-around ">
-	School: {{vm.exam.school}}
-	<br>
-	Class: {{vm.exam.school_class}}
-	<br>
-	Professor: {{vm.exam.professor}}
-	<br>
-	Description: {{vm.exam.description}}
-	<br>
-	Price: {{vm.exam.price}}
-	<br>
-	Secret: {{vm.exam.secret}}
-	<br>
-	</md-whiteframe>
-	<md-divider></md-divider>
-	<success-directive></success-directive>
-</md-content>
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+
+<h1 class='text-center'>
+  <span class="label label-info">Resource Porfolio
+  </span>
+</h1>
+<br>
+<div class="row">
+  <div class="col-lg-6 col-sm-12">
+
+
+  <div class="panel panel-info">
+   <div class="panel-heading">Educational Resource Info</div>
+   <div class="panel-body">
+
+
+<dl class="dl-horizontal">
+  <dt>Resource ID</dt>
+  <dd>{{vm.exam.id}}</dd>
+  <dt>Class</dt>
+  <dd>{{vm.exam.school_class}}</dd>
+  <dt>Professor</dt>
+  <dd>{{vm.exam.professor}}</dd>
+  <dt>Description</dt>
+  <dd>{{vm.exam.description}}</dd>
+  <dt ng-hide="vm.exam.free_or_nah">Price</dt>
+  <dd ng-hide="vm.exam.free_or_nah">{{vm.exam.price}}</dd>
+</dl>
+
+   
+    </div>
+  </div>
+</div>
+  <div class="col-lg-6 col-sm-12">
+  <div class="panel panel-warning">
+    <div class="panel-heading">current amount</div>
+  <div class="panel-body">
+  <div class="alert alert-success" role="alert">
+  <h4 class="text-center">Balance: <span class="glyphicon glyphicon-education" airia-hidden="true"></span>
+  {{vm.balance}} Dogecoins ~ <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>5.00 USD</h4>
+
 
 </div>
+
+
+<div class="input-group">
+      <input type="text" class="form-control" placeholder="You're DOGECOIN address">
+      <span class="input-group-btn">
+        <button class="btn btn-info" type="button">CASHOUT</button>
+      </span>
+    </div>
+    
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
