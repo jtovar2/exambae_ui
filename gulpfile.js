@@ -135,15 +135,55 @@ gulp.task('index', function() {
     './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
     
 
-    var source_css = gulpFilter('**/*.css');
-    console.log(source_css);
 
+    var bower_woff = mainBowerFiles('**/*.woff*', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
+
+    var bower_ttf = mainBowerFiles('**/*ttf', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
     var bower_css = mainBowerFiles('**/*css', {
     "overrides": {
         "bootstrap": {
             "main": [
     "dist/css/bootstrap.css",
-    "dist/js/bootstrap.js"
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
   ]
         },
         "angular-boostrap" : {
@@ -159,6 +199,8 @@ gulp.task('index', function() {
     console.log(bower_css)
     var sources_list = bower_js.concat(bower_css);
     sources_list = sources_list.concat(file_sources);
+    sources_list = sources_list.concat(bower_woff);
+    sources_list = sources_list.concat(bower_ttf);
 
     var sources = gulp.src(sources_list, {read: false});
 
@@ -208,13 +250,58 @@ gulp.task('dist:js', function() {
 
 gulp.task('bower', ['index', 'index:dist'], function() {
     var bowerFiles_js = mainBowerFiles('**/*.js');
+
+    var bower_woff = mainBowerFiles('**/*.woff*', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
+
+    var bower_ttf = mainBowerFiles('**/*ttf', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
+
+
     var bower_css = mainBowerFiles('**/*.css', {
     "overrides": {
         "bootstrap": {
             "main": [
     "dist/css/bootstrap.css",
-    "dist/js/bootstrap.js"
-  ]
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+    ]
         },
         "angular-boostrap" : {
             "main": [
@@ -225,7 +312,10 @@ gulp.task('bower', ['index', 'index:dist'], function() {
         } } }
     ); 
     console.log(bowerFiles_js.concat(bower_css));  
-    return gulp.src(bowerFiles_js.concat(bower_css) , {base: "bower_components/"})
+    var all_sources = bowerFiles_js.concat(bower_css);
+    all_sources = all_sources.concat(bower_ttf);
+    all_sources = all_sources.concat(bower_woff);
+    return gulp.src(all_sources , {base: "bower_components/"})
         .pipe(gulp.dest('./dev/bower_components'))
         .pipe(gulp.dest('./dist/bower_components'));
 });

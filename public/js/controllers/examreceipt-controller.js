@@ -9,7 +9,7 @@
 
 		vm.exam = {};
 
-		
+		bitcoinApiFactory.getDogecoinExchangeRate().then(updateExchangeRate);
 
 		if('secret' in $stateParams && 'examId' in $stateParams)
 		{
@@ -28,6 +28,14 @@
 		{
 			vm.balance = parseFloat( data.balance);
 			console.log(data);
+		}
+
+		function updateExchangeRate(data)
+		{
+			console.log(data);
+			console.log(data);
+			console.log(data[0].price_usd)
+			vm.dogeExchangeRate = parseFloat(data[0].price_usd);
 		}
 	}]);
 })(exambae);
