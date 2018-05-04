@@ -39,7 +39,7 @@
 
 
 
-        <button class="btn btn-success" type="button">
+        <button ng-hide="transaction.state === 'NOT CONFIRMED' " class="btn btn-success" type="button">
           <a ng-href="{{downloadLink}}">
 <span class="glyphicon glyphicon-cloud-download" aria-hidden="true"></span>
          DOWNLOAD </a></button>

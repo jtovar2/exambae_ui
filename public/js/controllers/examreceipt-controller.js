@@ -3,11 +3,19 @@
 		function($scope, $stateParams, ExamFactory, bitcoinApiFactory) {
 
 		var vm = this;
+
+		vm.txn_id = "asdflkj;lkjasd;flkjasdf";
+		vm.doge_deposit_address = "";
 		vm.loading = true;
 
 		vm.balance = 0.0;
 
+
+		vm.cashout = cashout;
 		vm.exam = {};
+
+		vm.loading_cashout = true;
+		vm.cashout_process = false;
 
 		bitcoinApiFactory.getDogecoinExchangeRate().then(updateExchangeRate);
 
@@ -22,6 +30,22 @@
 			console.log(data);
 			vm.loading = false;
 			bitcoinApiFactory.getBalance(vm.exam.id).then(updateBalance)
+		}
+
+		function cashout()
+		{
+			vm.cashout_process = true;
+			vm.loading_cashout = true;
+			bitcoinApiFactory.cashout(vm.exam.id, vm.exam.secret, vm.doge_deposit_address).then(getTransactionStatus);
+		}
+
+		function getTransactionStatus(data)
+		{
+
+			vm.loading_cashout = false;
+			console.log(data);
+			vm.txn_id = data.txn_id;
+
 		}
 
 		function updateBalance(data)

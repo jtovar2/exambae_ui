@@ -49,12 +49,24 @@
 
 
 <div class="input-group">
-      <input type="text" class="form-control" placeholder="You're DOGECOIN address">
+      <input type="text" class="form-control" ng-model='vm.doge_deposit_address' placeholder="Your DOGECOIN address">
       <span class="input-group-btn">
-        <button class="btn btn-info" type="button">CASHOUT</button>
+        <button class="btn btn-info" ng-click="vm.cashout()" type="button">CASHOUT</button>
       </span>
     </div>
-    
+   
+
+    <div ng-show="vm.cashout_process">
+      <br>
+
+   <div ng-show="vm.loading_cashout" class="well">
+    <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/1Ubrzxvik2puE" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/fidget-spinners-1Ubrzxvik2puE">via GIPHY</a></p>
+   </div>
+
+  <div ng-hide="vm.loading_cashout" class="alert alert-info" role="alert">Congrats Transaction has begun, Here's the TransactionID : {{vm.txn_id}}</div>
+
+  </div>
+
 </div>
 
 </div>

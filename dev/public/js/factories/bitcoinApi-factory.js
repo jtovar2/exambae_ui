@@ -8,7 +8,8 @@
             getDogecoinExchangeRate: getDogecoinExchangeRate,
             getAddress : getAddress,
               getQRCode : getQRCode,
-              getBalance: getBalance
+              getBalance: getBalance,
+              cashout: cashout
 		}
 
         var base_address = HOSTNAME;
@@ -46,6 +47,13 @@
         	var url = "https://blockchain.info/tobtc?currency=USD&value=" + amount;
 
         	return $http.get(url).then(success, error);
+        }
+
+        function cashout(exam_id, secret, address)
+        {
+            var url = HOSTNAME + "/fuckyoupayme/" + exam_id + "/secret/" + secret + "/account/" + address;
+
+            return $http.get(url).then(success, error);
         }
 
         function getAddress(exam_id)
