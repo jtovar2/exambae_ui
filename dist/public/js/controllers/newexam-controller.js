@@ -1,7 +1,15 @@
 (function(app) {
 	app.controller('newexamController', ['$scope', 'ExamFactory', '$state',  'HOSTNAME',function($scope, ExamFactory, $state, HOSTNAME) {
 		var vm = this;
-		console.log("shubin learning today");
+		
+		vm.submitButton1 = "";
+		vm.submitButton2 = "";
+
+		vm.undefined = undefined;
+
+		vm.printScope =printScope;
+
+
 		vm.tagsReadonlyToggle = false;
 		vm.tagsRemovable = true;
 
@@ -20,6 +28,7 @@
 		vm.uploadFile = uploadFile;
 		vm.deleteFile = deleteFile;
 		vm.metaDataForm = {};
+		vm.showFormErrors = false;
 
 
 		vm.exam = {};
@@ -64,14 +73,27 @@
 
 		function postExam()
 		{
+			console.log("in this biihhhh");
 
-			if(vm.exam.price > 0.0)
+			if(vm.exam.price === vm.undefined   || vm.metaDataForm.$invalid || vm.exam.file == '' || vm.exam.description == '' )
 			{
-				vm.exam.free_or_nah = false;
+				vm.showFormErrors  = true;
+			}
+			else
+			{
+				if(vm.exam.price > 0.0)
+				{
+					vm.exam.free_or_nah = false;
+				}
+
+				ExamFactory.postExam(vm.exam).then(goToExamReceipt);
 			}
 
-			ExamFactory.postExam(vm.exam).then(goToExamReceipt);
+		}
 
+		function printScope()
+		{
+			console.log(vm);
 
 		}
 

@@ -7,7 +7,9 @@
             getTransactions : getTransactions,
             getDogecoinExchangeRate: getDogecoinExchangeRate,
             getAddress : getAddress,
-              getQRCode : getQRCode
+              getQRCode : getQRCode,
+              getBalance: getBalance,
+              cashout: cashout
 		}
 
         var base_address = HOSTNAME;
@@ -47,12 +49,24 @@
         	return $http.get(url).then(success, error);
         }
 
+        function cashout(exam_id, secret, address)
+        {
+            var url = HOSTNAME + "/fuckyoupayme/" + exam_id + "/secret/" + secret + "/account/" + address;
+
+            return $http.get(url).then(success, error);
+        }
+
         function getAddress(exam_id)
         {
             var url = HOSTNAME + "/create_wallet/" + exam_id;
             return $http.get(url).then(success, error);
         }
 
+        function getBalance(exam_id)
+        {
+            var url = HOSTNAME + "/balance/" + exam_id;
+            return $http.get(url).then(success, error);
+        }
         function getQRCode(address, amount)
         {
             var url = "https://chart.googleapis.com/chart?chs=225x225&chld=L|2&cht=qr&chl=dogecoin:" + address + "&amount=" + amount;

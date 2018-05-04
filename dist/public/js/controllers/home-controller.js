@@ -6,17 +6,21 @@
 		 var vm = this;
 
      vm.loadingExams = true;
-     vm.exams = [ {"description" : 'test1'} ];
+     vm.exams = [{"school": "Georgia State University", "number_of_downloads": 0, "description": "a;sldfkja;sldkfja;lsdkfja;sldfja;lsjdf;alsdjfalsdfj", "tags": ["tag", "tagg2"], "price": 1, "school_class": "class2040", "id": "E031582AA222A086", "professor": "Ayyyee", "bitcoin_address": "DHrE8NTL7dNxm1dgFH9Pg4cxhhsRsPkgan", "file": "D1CF5576FD79B53E", "free_or_nah": false},
+     {"school": "Georgia State University", "number_of_downloads": 0, "description": "a;sldfkja;sldkfja;lsdkfja;sldfja;lsjdf;alsdjfalsdfj", "tags": ["tag", "tagg2"], "price": 1, "school_class": "class2040", "id": "E031582AA222A086", "professor": "Ayyyee", "bitcoin_address": "DHrE8NTL7dNxm1dgFH9Pg4cxhhsRsPkgan", "file": "D1CF5576FD79B53E", "free_or_nah": true}];
 
-
+     vm.not_true = false;
+     vm.WTF= "WTFF";
 	vm.loadingSchools = true;
+  vm.schoolQueryNoResults = true;
 	vm.isSchoolSearchDisabled = false;
     vm.isSchoolCacheDisabled = false;
 
 	vm.schoolHasBeenSelected = false;
-	vm.schools = [];
+
+  vm.schools = [];
   SearchFactory.getSchools().then(updateLoadingSchools);
-	vm.searchSchool = "";
+	vm.searchSchool = undefined;
 	vm.selectedSchool = "";
 	vm.selectedSchoolChange = selectedSchoolChange;
 	vm.searchSchoolChange = searchSchoolChange;
@@ -32,6 +36,7 @@
   }
     function searchSchoolChange(text) {
 
+
       vm.loadingClasses = true;
       vm.loadingExams = true;
     	vm.schoolHasBeenSelected = false;
@@ -42,7 +47,7 @@
     }
 
     function selectedSchoolChange(item) {
-
+      vm.selectedSchool = item;
     	if(vm.selectedSchool == null || vm.selectedSchool === "")
     	{
     		vm.schoolHasBeenSelected = false;
@@ -56,6 +61,7 @@
     	else
     	{
     		vm.schoolHasBeenSelected = true;
+
         SearchFactory.getClasses(vm.selectedSchool).then(updateLoadingClasses);
     	}
     	console.log("selection method");
@@ -97,6 +103,7 @@
     }
 
     function selectedClassChange(item) {
+      vm.selectedClass = item;
       if(vm.selectedClass === null || vm.selectedClass === "")
       {
         vm.classHasBeenSelected = false
@@ -165,7 +172,7 @@
     }
 
     function selectedTagChange(item) {
-
+      vm.selectedTag = item;
 
       console.log(item);
       if(item != null)

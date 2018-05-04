@@ -1,50 +1,39 @@
-<!DOCTYPE html>
-<html>
-
-<head>
+<!doctype html>
+<html ng-app="exambae">
+  <head>
+    <meta charset="utf-8">
     <title>exambae</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css({.tmp/serve,src}) styles/app.css -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/public/css/app.css">
     <!-- endinject -->
-</head>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-<body ng-app="exambae" ng-cloak>
-    <div ng-controller="HeaderController as vm">
-    <md-toolbar class="md-tall md-accent">
-    <div layout="row">
-
-    <md-menu>
-      <md-button ng-click="vm.openMenu($mdOpenMenu, $event)"><md-icon ng-bind="'menu'" ></md-icon></md-button>
-      <!--<md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="ctrl.openMenu($mdMenu, $event)">
-        <md-icon md-menu-origin md-svg-icon="call:phone"></md-icon>
-      </md-button>-->
-      <md-menu-content width="4">
-        <md-menu-item>
-          <md-button ui-sref='checktransactions'>
-            Check past transactions
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-    
-      <h1 class="md-toolbar-tools" ui-sref="newexam">
-        <span>ExamBae 
-            <md-icon ng-bind="'favorite'"></md-icon></span>
-      </h1>
-    </div>
-          <div flex="25" ng-hide="vm.state != 'home'" >
-              <md-button aria-label="Learn More" ui-sref="newexam">Upload today and Turn that A into a paycheck</md-button>
-        </div>
-        <div flex="25" ng-hide="vm.state != 'newexam' &&  vm.state != 'examreceipt' && vm.state != 'viewexam' && vm.state != 'checktransactions'" >
-              <md-button aria-label="Learn More" ui-sref="home">Get back to schemin'</md-button>
-        </div>
-    
-    </md-toolbar>
-    
-    </div>
 
     <div ui-view></div>
+    <!-- build:js(src) scripts/vendor.js -->
+    <!-- bower:js -->
+    <!-- run `gulp inject` to automatically populate bower script dependencies -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <!-- inject:js -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
@@ -74,6 +63,11 @@
     <script src="/public/js/directives/success-directive.js"></script>
     <script src="/public/js/directives/transaction-directive.js"></script>
     <!-- endinject -->
-</body>
 
+    <!-- inject:partials -->
+    <!-- angular templates will be automatically converted in js and inserted here -->
+    <!-- endinject -->
+    <!-- endbuild -->
+
+  </body>
 </html>
