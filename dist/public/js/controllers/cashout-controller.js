@@ -1,5 +1,5 @@
 (function(app) {
-	app.controller('cashoutController', ['$scope', '$stateParams', 'ExamFactory', 'bitcoinApiFactory', '$mdDialog', function($scope, $stateParams, ExamFactory, bitcoinApiFactory, $mdDialog) {
+	app.controller('cashoutController', ['$scope', '$stateParams', 'ExamFactory', 'bitcoinApiFactory', '$state', function($scope, $stateParams, ExamFactory, bitcoinApiFactory, $state) {
 
 		console.log($stateParams);
 
@@ -10,8 +10,14 @@
 
 
 		vm.account = "";
+		vm.cashout = cashout;
 		        
 
+
+		function cashout()
+		{
+			$state.go('examreceipt', {'examId' : vm.exam_id, 'secret': vm.exam_secret});
+		}
 
 	}]);
 })(exambae);

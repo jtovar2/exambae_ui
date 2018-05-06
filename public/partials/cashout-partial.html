@@ -1,44 +1,54 @@
-<div md-whiteframe ng-controller="cashoutController" layout="column" layout-align='center center' layout-fill flex=80>
+<div class="container">
+
+
+<div class="row">
+  <div class="col-lg-6 col-sm-8 col-lg-offset-3 col-sm-offset-3">
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+<div class="panel panel-warning">
+    <div class="panel-heading">Resource Authentication</div>
+  <div class="panel-body">
+<div class="well">
+  <span>
+    Yo, ready to cash out?? We are going to need the Resource's ID and it's Secret.
+  </span>
+  <br>
+  <span>
+    This is why it's so important to save a Resource's ID and its secret.
+  </span>
+</div>
 
 
 
-	<!--<div layout="column" layout-align="space-between center" flex=80>-->
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon3">Resource ID:</span>
+  <input type="text" class="form-control" id="basic-url" ng-model='vm.exam_id' >
+</div>
+<br>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon3">Resource Secret:
+  </span>
+  <input type="text" class="form-control" id="basic-url" ng-model='vm.exam_secret' >
+</div>
 
+<br>
+<div class="row">
+    <div class="col-md-4 col-md-offset-3
+    col-sm-6 col-sm-offset-3">
 
-	<md-toolbar class="md-accent">
-    <div class="md-toolbar-tools">
+        <div class="btn-group">
+        <label class="btn btn-success" ng-model="checkModel.right" ng-click='vm.cashout()' uib-btn-checkbox>Let's Get This Schmoney</label>
+    </div>          
+    </div>
 
-      <h2>Ready to cash out?? Tell us your secret~~</h2>
-      <span flex></span>
-      
 
     </div>
-  </md-toolbar>
-  <!---<md-whiteframe class="md-whiteframe-5dp"  layout='column' layout-align="space-around star">
-  	<h4>Notes</h4>
-  	<span>Once your resource has recieved payments or donations from clients, you will be able to move the dogecoins to your dogecoin wallet
-    Since ExamBae is all about anonymity, we have no idea who created the resource. To prove ownership of a resource you must provide its ID and its secret</span>
-    <br>
-    <p>This is why it is very important to save the resource's ID and secret!! Without it we can't prove you own it</p>
-    
-  </md-whiteframe> -->
-	<div flex=80 layout="row" layout-align="center center">
-	<md-input-container layout-align='start center' flex=80>
-			<h3>Resource ID:</h3>
-  			<input required type="text" id="bitcoin" ng-model="vm.clients_bitcoin_address" >
-		</md-input-container>
-	</div>
-	
-	
-	<div flex=80 layout="row" layout-align="center center">
-	<md-input-container layout-align='start center' flex=80>
-			<h3>Resource Secret:</h3>
-  			<input required type="text" id="bitcoin" ng-model="vm.clients_bitcoin_address">
-		</md-input-container>
-	</div>
-
-	<div flex=80 layout="row" layout-align="center center">
-      <md-button class="md-raised md-accent">Ayyyee let's get this money</md-button>
-	</div>
-	<br>
 </div>
+  </div>
+
+
+</div>
+
+</div>
+

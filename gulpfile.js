@@ -357,23 +357,87 @@ gulp.task('uglify-js', function() {
 });
 
 gulp.task('index:dist', function() {
-    var target = gulp.src('./dist/index.html');
-
-
+     var target = gulp.src('./dist/index.html');
+    
     var file_sources = [ './public/js/config/app.js', './public/js/config/config.js', './public/js/factories/**/*.js',
     './public/js/services/**/*.js', './public/js/controllers/**/*.js', './public/js/filters/**/*.js', './public/js/directives/**/*.js', './public/css/**/*.css'];
     
-    var bower_css = mainBowerFiles('**/*.css'); 
+
+
+    var bower_woff = mainBowerFiles('**/*.woff*', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
+
+    var bower_ttf = mainBowerFiles('**/*ttf', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
+    var bower_css = mainBowerFiles('**/*css', {
+    "overrides": {
+        "bootstrap": {
+            "main": [
+    "dist/css/bootstrap.css",
+    "dist/js/bootstrap.js",
+    "dist/fonts/glyphicons-halflings-regular.woff2",
+    "dist/fonts/glyphicons-halflings-regular.ttf",
+    "dist/fonts/glyphicons-halflings-regular.woff"
+  ]
+        },
+        "angular-boostrap" : {
+            "main": [
+            "./ui-bootstrap-tpls.min.js",
+            "./ui-bootstrap.js",
+            "./ui-bootstrap-csp.css"
+            ]
+        } } }
+        ); 
     var bower_js = mainBowerFiles('**/*.js');
 
+    console.log(bower_css)
     var sources_list = bower_js.concat(bower_css);
     sources_list = sources_list.concat(file_sources);
+    sources_list = sources_list.concat(bower_woff);
+    sources_list = sources_list.concat(bower_ttf);
 
-    var sources = gulp.src(sources_list, {read: false}); 
+    var sources = gulp.src(sources_list, {read: false});
 
+    console.log("ALLLLLL SOURCESSSS*****************************");
+    console.log(sources_list); 
 
     return target.pipe(inject(sources))
         .pipe(gulp.dest('./dist'))
+
 });
 
 gulp.task('dist:iife', function() {
