@@ -40,11 +40,11 @@
         {
             return base_address + '/blob/' + blobKey;
         }
-        function createBlob(file, uploadUrl)
+        function createBlob(file, filename, uploadUrl)
         {
 
             var fd = new FormData();
-            fd.append('file', file);
+            fd.append(filename, file);
             return $http.post(uploadUrl, fd, {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}

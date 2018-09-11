@@ -48,7 +48,9 @@
 		{
 			//TODO
 			var file = document.getElementById('file').files[0];
-			ExamFactory.createBlob(file, vm.uploadUrl).then(updateBlobKey);
+			console.log(file);
+			var filename = file.name;
+			ExamFactory.createBlob(file, filename, vm.uploadUrl).then(updateBlobKey);
 		}
 
 		function updateBlobKey(data)

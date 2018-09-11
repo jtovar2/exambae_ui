@@ -8,6 +8,7 @@
 
 				$scope.uploadFile = function(){
 				console.log("uploading");
+				console.log($scope.blob);
             	var file = $scope.blob;
 
             }

@@ -2,4 +2,6 @@ node_modules/
 bower_components/
 config.js
 env_vars.json
-
+pr-app.yaml
+pr_env_vars.json
+qa_env_vars.json
