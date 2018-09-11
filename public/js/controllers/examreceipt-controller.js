@@ -8,6 +8,8 @@
 		vm.doge_deposit_address = "";
 		vm.loading = true;
 
+		vm.error = false;
+
 		vm.balance = 0.0;
 
 
@@ -21,12 +23,19 @@
 
 		if('secret' in $stateParams && 'examId' in $stateParams)
 		{
-			ExamFactory.getExamWithSecret($stateParams.examId, $stateParams.secret).then(updateExam);
+			ExamFactory.getExamWithSecret($stateParams.examId, $stateParams.secret).then(updateExam, failed);
 		}
+		function failed(data)
+		{
+			console.log("failed");
 
+			vm.loading = false;
+			vm.error = true;
+		}
 		function updateExam(data)
 		{
 			vm.exam = data;
+			console.log("diss the response");
 			console.log(data);
 			vm.loading = false;
 			bitcoinApiFactory.getBalance(vm.exam.id).then(updateBalance)
@@ -43,7 +52,6 @@
 		{
 
 			vm.loading_cashout = false;
-			console.log(data);
 			vm.txn_id = data.txn_id;
 
 		}
@@ -51,14 +59,10 @@
 		function updateBalance(data)
 		{
 			vm.balance = parseFloat( data.balance);
-			console.log(data);
 		}
 
 		function updateExchangeRate(data)
 		{
-			console.log(data);
-			console.log(data);
-			console.log(data[0].price_usd)
 			vm.dogeExchangeRate = parseFloat(data[0].price_usd);
 		}
 	}]);
